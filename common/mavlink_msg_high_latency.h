@@ -43,10 +43,10 @@ typedef struct __mavlink_high_latency_t {
 
 #if MAVLINK_COMMAND_24BIT
 #define MAVLINK_MESSAGE_INFO_HIGH_LATENCY { \
-    234, \
-    "HIGH_LATENCY", \
-    24, \
-    {  { "custom_mode", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, offsetof(mavlink_high_latency_t, custom_mode) }, \
+	234, \
+	"HIGH_LATENCY", \
+	24, \
+	{  { "custom_mode", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, offsetof(mavlink_high_latency_t, custom_mode) }, \
          { "latitude", NULL, MAVLINK_TYPE_INT32_T, 0, 4, offsetof(mavlink_high_latency_t, latitude) }, \
          { "longitude", NULL, MAVLINK_TYPE_INT32_T, 0, 8, offsetof(mavlink_high_latency_t, longitude) }, \
          { "roll", NULL, MAVLINK_TYPE_INT16_T, 0, 12, offsetof(mavlink_high_latency_t, roll) }, \
@@ -74,9 +74,9 @@ typedef struct __mavlink_high_latency_t {
 }
 #else
 #define MAVLINK_MESSAGE_INFO_HIGH_LATENCY { \
-    "HIGH_LATENCY", \
-    24, \
-    {  { "custom_mode", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, offsetof(mavlink_high_latency_t, custom_mode) }, \
+	"HIGH_LATENCY", \
+	24, \
+	{  { "custom_mode", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, offsetof(mavlink_high_latency_t, custom_mode) }, \
          { "latitude", NULL, MAVLINK_TYPE_INT32_T, 0, 4, offsetof(mavlink_high_latency_t, latitude) }, \
          { "longitude", NULL, MAVLINK_TYPE_INT32_T, 0, 8, offsetof(mavlink_high_latency_t, longitude) }, \
          { "roll", NULL, MAVLINK_TYPE_INT16_T, 0, 12, offsetof(mavlink_high_latency_t, roll) }, \
@@ -137,67 +137,67 @@ typedef struct __mavlink_high_latency_t {
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_high_latency_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
-                               uint8_t base_mode, uint32_t custom_mode, uint8_t landed_state, int16_t roll, int16_t pitch, uint16_t heading, int8_t throttle, int16_t heading_sp, int32_t latitude, int32_t longitude, int16_t altitude_amsl, int16_t altitude_sp, uint8_t airspeed, uint8_t airspeed_sp, uint8_t groundspeed, int8_t climb_rate, uint8_t gps_nsat, uint8_t gps_fix_type, uint8_t battery_remaining, int8_t temperature, int8_t temperature_air, uint8_t failsafe, uint8_t wp_num, uint16_t wp_distance)
+						       uint8_t base_mode, uint32_t custom_mode, uint8_t landed_state, int16_t roll, int16_t pitch, uint16_t heading, int8_t throttle, int16_t heading_sp, int32_t latitude, int32_t longitude, int16_t altitude_amsl, int16_t altitude_sp, uint8_t airspeed, uint8_t airspeed_sp, uint8_t groundspeed, int8_t climb_rate, uint8_t gps_nsat, uint8_t gps_fix_type, uint8_t battery_remaining, int8_t temperature, int8_t temperature_air, uint8_t failsafe, uint8_t wp_num, uint16_t wp_distance)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-    char buf[MAVLINK_MSG_ID_HIGH_LATENCY_LEN];
-    _mav_put_uint32_t(buf, 0, custom_mode);
-    _mav_put_int32_t(buf, 4, latitude);
-    _mav_put_int32_t(buf, 8, longitude);
-    _mav_put_int16_t(buf, 12, roll);
-    _mav_put_int16_t(buf, 14, pitch);
-    _mav_put_uint16_t(buf, 16, heading);
-    _mav_put_int16_t(buf, 18, heading_sp);
-    _mav_put_int16_t(buf, 20, altitude_amsl);
-    _mav_put_int16_t(buf, 22, altitude_sp);
-    _mav_put_uint16_t(buf, 24, wp_distance);
-    _mav_put_uint8_t(buf, 26, base_mode);
-    _mav_put_uint8_t(buf, 27, landed_state);
-    _mav_put_int8_t(buf, 28, throttle);
-    _mav_put_uint8_t(buf, 29, airspeed);
-    _mav_put_uint8_t(buf, 30, airspeed_sp);
-    _mav_put_uint8_t(buf, 31, groundspeed);
-    _mav_put_int8_t(buf, 32, climb_rate);
-    _mav_put_uint8_t(buf, 33, gps_nsat);
-    _mav_put_uint8_t(buf, 34, gps_fix_type);
-    _mav_put_uint8_t(buf, 35, battery_remaining);
-    _mav_put_int8_t(buf, 36, temperature);
-    _mav_put_int8_t(buf, 37, temperature_air);
-    _mav_put_uint8_t(buf, 38, failsafe);
-    _mav_put_uint8_t(buf, 39, wp_num);
+	char buf[MAVLINK_MSG_ID_HIGH_LATENCY_LEN];
+	_mav_put_uint32_t(buf, 0, custom_mode);
+	_mav_put_int32_t(buf, 4, latitude);
+	_mav_put_int32_t(buf, 8, longitude);
+	_mav_put_int16_t(buf, 12, roll);
+	_mav_put_int16_t(buf, 14, pitch);
+	_mav_put_uint16_t(buf, 16, heading);
+	_mav_put_int16_t(buf, 18, heading_sp);
+	_mav_put_int16_t(buf, 20, altitude_amsl);
+	_mav_put_int16_t(buf, 22, altitude_sp);
+	_mav_put_uint16_t(buf, 24, wp_distance);
+	_mav_put_uint8_t(buf, 26, base_mode);
+	_mav_put_uint8_t(buf, 27, landed_state);
+	_mav_put_int8_t(buf, 28, throttle);
+	_mav_put_uint8_t(buf, 29, airspeed);
+	_mav_put_uint8_t(buf, 30, airspeed_sp);
+	_mav_put_uint8_t(buf, 31, groundspeed);
+	_mav_put_int8_t(buf, 32, climb_rate);
+	_mav_put_uint8_t(buf, 33, gps_nsat);
+	_mav_put_uint8_t(buf, 34, gps_fix_type);
+	_mav_put_uint8_t(buf, 35, battery_remaining);
+	_mav_put_int8_t(buf, 36, temperature);
+	_mav_put_int8_t(buf, 37, temperature_air);
+	_mav_put_uint8_t(buf, 38, failsafe);
+	_mav_put_uint8_t(buf, 39, wp_num);
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_HIGH_LATENCY_LEN);
 #else
-    mavlink_high_latency_t packet;
-    packet.custom_mode = custom_mode;
-    packet.latitude = latitude;
-    packet.longitude = longitude;
-    packet.roll = roll;
-    packet.pitch = pitch;
-    packet.heading = heading;
-    packet.heading_sp = heading_sp;
-    packet.altitude_amsl = altitude_amsl;
-    packet.altitude_sp = altitude_sp;
-    packet.wp_distance = wp_distance;
-    packet.base_mode = base_mode;
-    packet.landed_state = landed_state;
-    packet.throttle = throttle;
-    packet.airspeed = airspeed;
-    packet.airspeed_sp = airspeed_sp;
-    packet.groundspeed = groundspeed;
-    packet.climb_rate = climb_rate;
-    packet.gps_nsat = gps_nsat;
-    packet.gps_fix_type = gps_fix_type;
-    packet.battery_remaining = battery_remaining;
-    packet.temperature = temperature;
-    packet.temperature_air = temperature_air;
-    packet.failsafe = failsafe;
-    packet.wp_num = wp_num;
+	mavlink_high_latency_t packet;
+	packet.custom_mode = custom_mode;
+	packet.latitude = latitude;
+	packet.longitude = longitude;
+	packet.roll = roll;
+	packet.pitch = pitch;
+	packet.heading = heading;
+	packet.heading_sp = heading_sp;
+	packet.altitude_amsl = altitude_amsl;
+	packet.altitude_sp = altitude_sp;
+	packet.wp_distance = wp_distance;
+	packet.base_mode = base_mode;
+	packet.landed_state = landed_state;
+	packet.throttle = throttle;
+	packet.airspeed = airspeed;
+	packet.airspeed_sp = airspeed_sp;
+	packet.groundspeed = groundspeed;
+	packet.climb_rate = climb_rate;
+	packet.gps_nsat = gps_nsat;
+	packet.gps_fix_type = gps_fix_type;
+	packet.battery_remaining = battery_remaining;
+	packet.temperature = temperature;
+	packet.temperature_air = temperature_air;
+	packet.failsafe = failsafe;
+	packet.wp_num = wp_num;
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_HIGH_LATENCY_LEN);
 #endif
 
-    msg->msgid = MAVLINK_MSG_ID_HIGH_LATENCY;
+	msg->msgid = MAVLINK_MSG_ID_HIGH_LATENCY;
     return mavlink_finalize_message(msg, system_id, component_id, MAVLINK_MSG_ID_HIGH_LATENCY_MIN_LEN, MAVLINK_MSG_ID_HIGH_LATENCY_LEN, MAVLINK_MSG_ID_HIGH_LATENCY_CRC);
 }
 
@@ -234,68 +234,68 @@ static inline uint16_t mavlink_msg_high_latency_pack(uint8_t system_id, uint8_t 
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_high_latency_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
-                               mavlink_message_t* msg,
-                                   uint8_t base_mode,uint32_t custom_mode,uint8_t landed_state,int16_t roll,int16_t pitch,uint16_t heading,int8_t throttle,int16_t heading_sp,int32_t latitude,int32_t longitude,int16_t altitude_amsl,int16_t altitude_sp,uint8_t airspeed,uint8_t airspeed_sp,uint8_t groundspeed,int8_t climb_rate,uint8_t gps_nsat,uint8_t gps_fix_type,uint8_t battery_remaining,int8_t temperature,int8_t temperature_air,uint8_t failsafe,uint8_t wp_num,uint16_t wp_distance)
+							   mavlink_message_t* msg,
+						           uint8_t base_mode,uint32_t custom_mode,uint8_t landed_state,int16_t roll,int16_t pitch,uint16_t heading,int8_t throttle,int16_t heading_sp,int32_t latitude,int32_t longitude,int16_t altitude_amsl,int16_t altitude_sp,uint8_t airspeed,uint8_t airspeed_sp,uint8_t groundspeed,int8_t climb_rate,uint8_t gps_nsat,uint8_t gps_fix_type,uint8_t battery_remaining,int8_t temperature,int8_t temperature_air,uint8_t failsafe,uint8_t wp_num,uint16_t wp_distance)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-    char buf[MAVLINK_MSG_ID_HIGH_LATENCY_LEN];
-    _mav_put_uint32_t(buf, 0, custom_mode);
-    _mav_put_int32_t(buf, 4, latitude);
-    _mav_put_int32_t(buf, 8, longitude);
-    _mav_put_int16_t(buf, 12, roll);
-    _mav_put_int16_t(buf, 14, pitch);
-    _mav_put_uint16_t(buf, 16, heading);
-    _mav_put_int16_t(buf, 18, heading_sp);
-    _mav_put_int16_t(buf, 20, altitude_amsl);
-    _mav_put_int16_t(buf, 22, altitude_sp);
-    _mav_put_uint16_t(buf, 24, wp_distance);
-    _mav_put_uint8_t(buf, 26, base_mode);
-    _mav_put_uint8_t(buf, 27, landed_state);
-    _mav_put_int8_t(buf, 28, throttle);
-    _mav_put_uint8_t(buf, 29, airspeed);
-    _mav_put_uint8_t(buf, 30, airspeed_sp);
-    _mav_put_uint8_t(buf, 31, groundspeed);
-    _mav_put_int8_t(buf, 32, climb_rate);
-    _mav_put_uint8_t(buf, 33, gps_nsat);
-    _mav_put_uint8_t(buf, 34, gps_fix_type);
-    _mav_put_uint8_t(buf, 35, battery_remaining);
-    _mav_put_int8_t(buf, 36, temperature);
-    _mav_put_int8_t(buf, 37, temperature_air);
-    _mav_put_uint8_t(buf, 38, failsafe);
-    _mav_put_uint8_t(buf, 39, wp_num);
+	char buf[MAVLINK_MSG_ID_HIGH_LATENCY_LEN];
+	_mav_put_uint32_t(buf, 0, custom_mode);
+	_mav_put_int32_t(buf, 4, latitude);
+	_mav_put_int32_t(buf, 8, longitude);
+	_mav_put_int16_t(buf, 12, roll);
+	_mav_put_int16_t(buf, 14, pitch);
+	_mav_put_uint16_t(buf, 16, heading);
+	_mav_put_int16_t(buf, 18, heading_sp);
+	_mav_put_int16_t(buf, 20, altitude_amsl);
+	_mav_put_int16_t(buf, 22, altitude_sp);
+	_mav_put_uint16_t(buf, 24, wp_distance);
+	_mav_put_uint8_t(buf, 26, base_mode);
+	_mav_put_uint8_t(buf, 27, landed_state);
+	_mav_put_int8_t(buf, 28, throttle);
+	_mav_put_uint8_t(buf, 29, airspeed);
+	_mav_put_uint8_t(buf, 30, airspeed_sp);
+	_mav_put_uint8_t(buf, 31, groundspeed);
+	_mav_put_int8_t(buf, 32, climb_rate);
+	_mav_put_uint8_t(buf, 33, gps_nsat);
+	_mav_put_uint8_t(buf, 34, gps_fix_type);
+	_mav_put_uint8_t(buf, 35, battery_remaining);
+	_mav_put_int8_t(buf, 36, temperature);
+	_mav_put_int8_t(buf, 37, temperature_air);
+	_mav_put_uint8_t(buf, 38, failsafe);
+	_mav_put_uint8_t(buf, 39, wp_num);
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_HIGH_LATENCY_LEN);
 #else
-    mavlink_high_latency_t packet;
-    packet.custom_mode = custom_mode;
-    packet.latitude = latitude;
-    packet.longitude = longitude;
-    packet.roll = roll;
-    packet.pitch = pitch;
-    packet.heading = heading;
-    packet.heading_sp = heading_sp;
-    packet.altitude_amsl = altitude_amsl;
-    packet.altitude_sp = altitude_sp;
-    packet.wp_distance = wp_distance;
-    packet.base_mode = base_mode;
-    packet.landed_state = landed_state;
-    packet.throttle = throttle;
-    packet.airspeed = airspeed;
-    packet.airspeed_sp = airspeed_sp;
-    packet.groundspeed = groundspeed;
-    packet.climb_rate = climb_rate;
-    packet.gps_nsat = gps_nsat;
-    packet.gps_fix_type = gps_fix_type;
-    packet.battery_remaining = battery_remaining;
-    packet.temperature = temperature;
-    packet.temperature_air = temperature_air;
-    packet.failsafe = failsafe;
-    packet.wp_num = wp_num;
+	mavlink_high_latency_t packet;
+	packet.custom_mode = custom_mode;
+	packet.latitude = latitude;
+	packet.longitude = longitude;
+	packet.roll = roll;
+	packet.pitch = pitch;
+	packet.heading = heading;
+	packet.heading_sp = heading_sp;
+	packet.altitude_amsl = altitude_amsl;
+	packet.altitude_sp = altitude_sp;
+	packet.wp_distance = wp_distance;
+	packet.base_mode = base_mode;
+	packet.landed_state = landed_state;
+	packet.throttle = throttle;
+	packet.airspeed = airspeed;
+	packet.airspeed_sp = airspeed_sp;
+	packet.groundspeed = groundspeed;
+	packet.climb_rate = climb_rate;
+	packet.gps_nsat = gps_nsat;
+	packet.gps_fix_type = gps_fix_type;
+	packet.battery_remaining = battery_remaining;
+	packet.temperature = temperature;
+	packet.temperature_air = temperature_air;
+	packet.failsafe = failsafe;
+	packet.wp_num = wp_num;
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_HIGH_LATENCY_LEN);
 #endif
 
-    msg->msgid = MAVLINK_MSG_ID_HIGH_LATENCY;
+	msg->msgid = MAVLINK_MSG_ID_HIGH_LATENCY;
     return mavlink_finalize_message_chan(msg, system_id, component_id, chan, MAVLINK_MSG_ID_HIGH_LATENCY_MIN_LEN, MAVLINK_MSG_ID_HIGH_LATENCY_LEN, MAVLINK_MSG_ID_HIGH_LATENCY_CRC);
 }
 
@@ -309,7 +309,7 @@ static inline uint16_t mavlink_msg_high_latency_pack_chan(uint8_t system_id, uin
  */
 static inline uint16_t mavlink_msg_high_latency_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_high_latency_t* high_latency)
 {
-    return mavlink_msg_high_latency_pack(system_id, component_id, msg, high_latency->base_mode, high_latency->custom_mode, high_latency->landed_state, high_latency->roll, high_latency->pitch, high_latency->heading, high_latency->throttle, high_latency->heading_sp, high_latency->latitude, high_latency->longitude, high_latency->altitude_amsl, high_latency->altitude_sp, high_latency->airspeed, high_latency->airspeed_sp, high_latency->groundspeed, high_latency->climb_rate, high_latency->gps_nsat, high_latency->gps_fix_type, high_latency->battery_remaining, high_latency->temperature, high_latency->temperature_air, high_latency->failsafe, high_latency->wp_num, high_latency->wp_distance);
+	return mavlink_msg_high_latency_pack(system_id, component_id, msg, high_latency->base_mode, high_latency->custom_mode, high_latency->landed_state, high_latency->roll, high_latency->pitch, high_latency->heading, high_latency->throttle, high_latency->heading_sp, high_latency->latitude, high_latency->longitude, high_latency->altitude_amsl, high_latency->altitude_sp, high_latency->airspeed, high_latency->airspeed_sp, high_latency->groundspeed, high_latency->climb_rate, high_latency->gps_nsat, high_latency->gps_fix_type, high_latency->battery_remaining, high_latency->temperature, high_latency->temperature_air, high_latency->failsafe, high_latency->wp_num, high_latency->wp_distance);
 }
 
 /**
@@ -323,7 +323,7 @@ static inline uint16_t mavlink_msg_high_latency_encode(uint8_t system_id, uint8_
  */
 static inline uint16_t mavlink_msg_high_latency_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_high_latency_t* high_latency)
 {
-    return mavlink_msg_high_latency_pack_chan(system_id, component_id, chan, msg, high_latency->base_mode, high_latency->custom_mode, high_latency->landed_state, high_latency->roll, high_latency->pitch, high_latency->heading, high_latency->throttle, high_latency->heading_sp, high_latency->latitude, high_latency->longitude, high_latency->altitude_amsl, high_latency->altitude_sp, high_latency->airspeed, high_latency->airspeed_sp, high_latency->groundspeed, high_latency->climb_rate, high_latency->gps_nsat, high_latency->gps_fix_type, high_latency->battery_remaining, high_latency->temperature, high_latency->temperature_air, high_latency->failsafe, high_latency->wp_num, high_latency->wp_distance);
+	return mavlink_msg_high_latency_pack_chan(system_id, component_id, chan, msg, high_latency->base_mode, high_latency->custom_mode, high_latency->landed_state, high_latency->roll, high_latency->pitch, high_latency->heading, high_latency->throttle, high_latency->heading_sp, high_latency->latitude, high_latency->longitude, high_latency->altitude_amsl, high_latency->altitude_sp, high_latency->airspeed, high_latency->airspeed_sp, high_latency->groundspeed, high_latency->climb_rate, high_latency->gps_nsat, high_latency->gps_fix_type, high_latency->battery_remaining, high_latency->temperature, high_latency->temperature_air, high_latency->failsafe, high_latency->wp_num, high_latency->wp_distance);
 }
 
 /**
@@ -360,59 +360,59 @@ static inline uint16_t mavlink_msg_high_latency_encode_chan(uint8_t system_id, u
 static inline void mavlink_msg_high_latency_send(mavlink_channel_t chan, uint8_t base_mode, uint32_t custom_mode, uint8_t landed_state, int16_t roll, int16_t pitch, uint16_t heading, int8_t throttle, int16_t heading_sp, int32_t latitude, int32_t longitude, int16_t altitude_amsl, int16_t altitude_sp, uint8_t airspeed, uint8_t airspeed_sp, uint8_t groundspeed, int8_t climb_rate, uint8_t gps_nsat, uint8_t gps_fix_type, uint8_t battery_remaining, int8_t temperature, int8_t temperature_air, uint8_t failsafe, uint8_t wp_num, uint16_t wp_distance)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-    char buf[MAVLINK_MSG_ID_HIGH_LATENCY_LEN];
-    _mav_put_uint32_t(buf, 0, custom_mode);
-    _mav_put_int32_t(buf, 4, latitude);
-    _mav_put_int32_t(buf, 8, longitude);
-    _mav_put_int16_t(buf, 12, roll);
-    _mav_put_int16_t(buf, 14, pitch);
-    _mav_put_uint16_t(buf, 16, heading);
-    _mav_put_int16_t(buf, 18, heading_sp);
-    _mav_put_int16_t(buf, 20, altitude_amsl);
-    _mav_put_int16_t(buf, 22, altitude_sp);
-    _mav_put_uint16_t(buf, 24, wp_distance);
-    _mav_put_uint8_t(buf, 26, base_mode);
-    _mav_put_uint8_t(buf, 27, landed_state);
-    _mav_put_int8_t(buf, 28, throttle);
-    _mav_put_uint8_t(buf, 29, airspeed);
-    _mav_put_uint8_t(buf, 30, airspeed_sp);
-    _mav_put_uint8_t(buf, 31, groundspeed);
-    _mav_put_int8_t(buf, 32, climb_rate);
-    _mav_put_uint8_t(buf, 33, gps_nsat);
-    _mav_put_uint8_t(buf, 34, gps_fix_type);
-    _mav_put_uint8_t(buf, 35, battery_remaining);
-    _mav_put_int8_t(buf, 36, temperature);
-    _mav_put_int8_t(buf, 37, temperature_air);
-    _mav_put_uint8_t(buf, 38, failsafe);
-    _mav_put_uint8_t(buf, 39, wp_num);
+	char buf[MAVLINK_MSG_ID_HIGH_LATENCY_LEN];
+	_mav_put_uint32_t(buf, 0, custom_mode);
+	_mav_put_int32_t(buf, 4, latitude);
+	_mav_put_int32_t(buf, 8, longitude);
+	_mav_put_int16_t(buf, 12, roll);
+	_mav_put_int16_t(buf, 14, pitch);
+	_mav_put_uint16_t(buf, 16, heading);
+	_mav_put_int16_t(buf, 18, heading_sp);
+	_mav_put_int16_t(buf, 20, altitude_amsl);
+	_mav_put_int16_t(buf, 22, altitude_sp);
+	_mav_put_uint16_t(buf, 24, wp_distance);
+	_mav_put_uint8_t(buf, 26, base_mode);
+	_mav_put_uint8_t(buf, 27, landed_state);
+	_mav_put_int8_t(buf, 28, throttle);
+	_mav_put_uint8_t(buf, 29, airspeed);
+	_mav_put_uint8_t(buf, 30, airspeed_sp);
+	_mav_put_uint8_t(buf, 31, groundspeed);
+	_mav_put_int8_t(buf, 32, climb_rate);
+	_mav_put_uint8_t(buf, 33, gps_nsat);
+	_mav_put_uint8_t(buf, 34, gps_fix_type);
+	_mav_put_uint8_t(buf, 35, battery_remaining);
+	_mav_put_int8_t(buf, 36, temperature);
+	_mav_put_int8_t(buf, 37, temperature_air);
+	_mav_put_uint8_t(buf, 38, failsafe);
+	_mav_put_uint8_t(buf, 39, wp_num);
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_HIGH_LATENCY, buf, MAVLINK_MSG_ID_HIGH_LATENCY_MIN_LEN, MAVLINK_MSG_ID_HIGH_LATENCY_LEN, MAVLINK_MSG_ID_HIGH_LATENCY_CRC);
 #else
-    mavlink_high_latency_t packet;
-    packet.custom_mode = custom_mode;
-    packet.latitude = latitude;
-    packet.longitude = longitude;
-    packet.roll = roll;
-    packet.pitch = pitch;
-    packet.heading = heading;
-    packet.heading_sp = heading_sp;
-    packet.altitude_amsl = altitude_amsl;
-    packet.altitude_sp = altitude_sp;
-    packet.wp_distance = wp_distance;
-    packet.base_mode = base_mode;
-    packet.landed_state = landed_state;
-    packet.throttle = throttle;
-    packet.airspeed = airspeed;
-    packet.airspeed_sp = airspeed_sp;
-    packet.groundspeed = groundspeed;
-    packet.climb_rate = climb_rate;
-    packet.gps_nsat = gps_nsat;
-    packet.gps_fix_type = gps_fix_type;
-    packet.battery_remaining = battery_remaining;
-    packet.temperature = temperature;
-    packet.temperature_air = temperature_air;
-    packet.failsafe = failsafe;
-    packet.wp_num = wp_num;
+	mavlink_high_latency_t packet;
+	packet.custom_mode = custom_mode;
+	packet.latitude = latitude;
+	packet.longitude = longitude;
+	packet.roll = roll;
+	packet.pitch = pitch;
+	packet.heading = heading;
+	packet.heading_sp = heading_sp;
+	packet.altitude_amsl = altitude_amsl;
+	packet.altitude_sp = altitude_sp;
+	packet.wp_distance = wp_distance;
+	packet.base_mode = base_mode;
+	packet.landed_state = landed_state;
+	packet.throttle = throttle;
+	packet.airspeed = airspeed;
+	packet.airspeed_sp = airspeed_sp;
+	packet.groundspeed = groundspeed;
+	packet.climb_rate = climb_rate;
+	packet.gps_nsat = gps_nsat;
+	packet.gps_fix_type = gps_fix_type;
+	packet.battery_remaining = battery_remaining;
+	packet.temperature = temperature;
+	packet.temperature_air = temperature_air;
+	packet.failsafe = failsafe;
+	packet.wp_num = wp_num;
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_HIGH_LATENCY, (const char *)&packet, MAVLINK_MSG_ID_HIGH_LATENCY_MIN_LEN, MAVLINK_MSG_ID_HIGH_LATENCY_LEN, MAVLINK_MSG_ID_HIGH_LATENCY_CRC);
 #endif
@@ -443,59 +443,59 @@ static inline void mavlink_msg_high_latency_send_struct(mavlink_channel_t chan, 
 static inline void mavlink_msg_high_latency_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  uint8_t base_mode, uint32_t custom_mode, uint8_t landed_state, int16_t roll, int16_t pitch, uint16_t heading, int8_t throttle, int16_t heading_sp, int32_t latitude, int32_t longitude, int16_t altitude_amsl, int16_t altitude_sp, uint8_t airspeed, uint8_t airspeed_sp, uint8_t groundspeed, int8_t climb_rate, uint8_t gps_nsat, uint8_t gps_fix_type, uint8_t battery_remaining, int8_t temperature, int8_t temperature_air, uint8_t failsafe, uint8_t wp_num, uint16_t wp_distance)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-    char *buf = (char *)msgbuf;
-    _mav_put_uint32_t(buf, 0, custom_mode);
-    _mav_put_int32_t(buf, 4, latitude);
-    _mav_put_int32_t(buf, 8, longitude);
-    _mav_put_int16_t(buf, 12, roll);
-    _mav_put_int16_t(buf, 14, pitch);
-    _mav_put_uint16_t(buf, 16, heading);
-    _mav_put_int16_t(buf, 18, heading_sp);
-    _mav_put_int16_t(buf, 20, altitude_amsl);
-    _mav_put_int16_t(buf, 22, altitude_sp);
-    _mav_put_uint16_t(buf, 24, wp_distance);
-    _mav_put_uint8_t(buf, 26, base_mode);
-    _mav_put_uint8_t(buf, 27, landed_state);
-    _mav_put_int8_t(buf, 28, throttle);
-    _mav_put_uint8_t(buf, 29, airspeed);
-    _mav_put_uint8_t(buf, 30, airspeed_sp);
-    _mav_put_uint8_t(buf, 31, groundspeed);
-    _mav_put_int8_t(buf, 32, climb_rate);
-    _mav_put_uint8_t(buf, 33, gps_nsat);
-    _mav_put_uint8_t(buf, 34, gps_fix_type);
-    _mav_put_uint8_t(buf, 35, battery_remaining);
-    _mav_put_int8_t(buf, 36, temperature);
-    _mav_put_int8_t(buf, 37, temperature_air);
-    _mav_put_uint8_t(buf, 38, failsafe);
-    _mav_put_uint8_t(buf, 39, wp_num);
+	char *buf = (char *)msgbuf;
+	_mav_put_uint32_t(buf, 0, custom_mode);
+	_mav_put_int32_t(buf, 4, latitude);
+	_mav_put_int32_t(buf, 8, longitude);
+	_mav_put_int16_t(buf, 12, roll);
+	_mav_put_int16_t(buf, 14, pitch);
+	_mav_put_uint16_t(buf, 16, heading);
+	_mav_put_int16_t(buf, 18, heading_sp);
+	_mav_put_int16_t(buf, 20, altitude_amsl);
+	_mav_put_int16_t(buf, 22, altitude_sp);
+	_mav_put_uint16_t(buf, 24, wp_distance);
+	_mav_put_uint8_t(buf, 26, base_mode);
+	_mav_put_uint8_t(buf, 27, landed_state);
+	_mav_put_int8_t(buf, 28, throttle);
+	_mav_put_uint8_t(buf, 29, airspeed);
+	_mav_put_uint8_t(buf, 30, airspeed_sp);
+	_mav_put_uint8_t(buf, 31, groundspeed);
+	_mav_put_int8_t(buf, 32, climb_rate);
+	_mav_put_uint8_t(buf, 33, gps_nsat);
+	_mav_put_uint8_t(buf, 34, gps_fix_type);
+	_mav_put_uint8_t(buf, 35, battery_remaining);
+	_mav_put_int8_t(buf, 36, temperature);
+	_mav_put_int8_t(buf, 37, temperature_air);
+	_mav_put_uint8_t(buf, 38, failsafe);
+	_mav_put_uint8_t(buf, 39, wp_num);
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_HIGH_LATENCY, buf, MAVLINK_MSG_ID_HIGH_LATENCY_MIN_LEN, MAVLINK_MSG_ID_HIGH_LATENCY_LEN, MAVLINK_MSG_ID_HIGH_LATENCY_CRC);
 #else
-    mavlink_high_latency_t *packet = (mavlink_high_latency_t *)msgbuf;
-    packet->custom_mode = custom_mode;
-    packet->latitude = latitude;
-    packet->longitude = longitude;
-    packet->roll = roll;
-    packet->pitch = pitch;
-    packet->heading = heading;
-    packet->heading_sp = heading_sp;
-    packet->altitude_amsl = altitude_amsl;
-    packet->altitude_sp = altitude_sp;
-    packet->wp_distance = wp_distance;
-    packet->base_mode = base_mode;
-    packet->landed_state = landed_state;
-    packet->throttle = throttle;
-    packet->airspeed = airspeed;
-    packet->airspeed_sp = airspeed_sp;
-    packet->groundspeed = groundspeed;
-    packet->climb_rate = climb_rate;
-    packet->gps_nsat = gps_nsat;
-    packet->gps_fix_type = gps_fix_type;
-    packet->battery_remaining = battery_remaining;
-    packet->temperature = temperature;
-    packet->temperature_air = temperature_air;
-    packet->failsafe = failsafe;
-    packet->wp_num = wp_num;
+	mavlink_high_latency_t *packet = (mavlink_high_latency_t *)msgbuf;
+	packet->custom_mode = custom_mode;
+	packet->latitude = latitude;
+	packet->longitude = longitude;
+	packet->roll = roll;
+	packet->pitch = pitch;
+	packet->heading = heading;
+	packet->heading_sp = heading_sp;
+	packet->altitude_amsl = altitude_amsl;
+	packet->altitude_sp = altitude_sp;
+	packet->wp_distance = wp_distance;
+	packet->base_mode = base_mode;
+	packet->landed_state = landed_state;
+	packet->throttle = throttle;
+	packet->airspeed = airspeed;
+	packet->airspeed_sp = airspeed_sp;
+	packet->groundspeed = groundspeed;
+	packet->climb_rate = climb_rate;
+	packet->gps_nsat = gps_nsat;
+	packet->gps_fix_type = gps_fix_type;
+	packet->battery_remaining = battery_remaining;
+	packet->temperature = temperature;
+	packet->temperature_air = temperature_air;
+	packet->failsafe = failsafe;
+	packet->wp_num = wp_num;
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_HIGH_LATENCY, (const char *)packet, MAVLINK_MSG_ID_HIGH_LATENCY_MIN_LEN, MAVLINK_MSG_ID_HIGH_LATENCY_LEN, MAVLINK_MSG_ID_HIGH_LATENCY_CRC);
 #endif
@@ -514,7 +514,7 @@ static inline void mavlink_msg_high_latency_send_buf(mavlink_message_t *msgbuf, 
  */
 static inline uint8_t mavlink_msg_high_latency_get_base_mode(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  26);
+	return _MAV_RETURN_uint8_t(msg,  26);
 }
 
 /**
@@ -524,7 +524,7 @@ static inline uint8_t mavlink_msg_high_latency_get_base_mode(const mavlink_messa
  */
 static inline uint32_t mavlink_msg_high_latency_get_custom_mode(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint32_t(msg,  0);
+	return _MAV_RETURN_uint32_t(msg,  0);
 }
 
 /**
@@ -534,7 +534,7 @@ static inline uint32_t mavlink_msg_high_latency_get_custom_mode(const mavlink_me
  */
 static inline uint8_t mavlink_msg_high_latency_get_landed_state(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  27);
+	return _MAV_RETURN_uint8_t(msg,  27);
 }
 
 /**
@@ -544,7 +544,7 @@ static inline uint8_t mavlink_msg_high_latency_get_landed_state(const mavlink_me
  */
 static inline int16_t mavlink_msg_high_latency_get_roll(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_int16_t(msg,  12);
+	return _MAV_RETURN_int16_t(msg,  12);
 }
 
 /**
@@ -554,7 +554,7 @@ static inline int16_t mavlink_msg_high_latency_get_roll(const mavlink_message_t*
  */
 static inline int16_t mavlink_msg_high_latency_get_pitch(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_int16_t(msg,  14);
+	return _MAV_RETURN_int16_t(msg,  14);
 }
 
 /**
@@ -564,7 +564,7 @@ static inline int16_t mavlink_msg_high_latency_get_pitch(const mavlink_message_t
  */
 static inline uint16_t mavlink_msg_high_latency_get_heading(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint16_t(msg,  16);
+	return _MAV_RETURN_uint16_t(msg,  16);
 }
 
 /**
@@ -574,7 +574,7 @@ static inline uint16_t mavlink_msg_high_latency_get_heading(const mavlink_messag
  */
 static inline int8_t mavlink_msg_high_latency_get_throttle(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_int8_t(msg,  28);
+	return _MAV_RETURN_int8_t(msg,  28);
 }
 
 /**
@@ -584,7 +584,7 @@ static inline int8_t mavlink_msg_high_latency_get_throttle(const mavlink_message
  */
 static inline int16_t mavlink_msg_high_latency_get_heading_sp(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_int16_t(msg,  18);
+	return _MAV_RETURN_int16_t(msg,  18);
 }
 
 /**
@@ -594,7 +594,7 @@ static inline int16_t mavlink_msg_high_latency_get_heading_sp(const mavlink_mess
  */
 static inline int32_t mavlink_msg_high_latency_get_latitude(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_int32_t(msg,  4);
+	return _MAV_RETURN_int32_t(msg,  4);
 }
 
 /**
@@ -604,7 +604,7 @@ static inline int32_t mavlink_msg_high_latency_get_latitude(const mavlink_messag
  */
 static inline int32_t mavlink_msg_high_latency_get_longitude(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_int32_t(msg,  8);
+	return _MAV_RETURN_int32_t(msg,  8);
 }
 
 /**
@@ -614,7 +614,7 @@ static inline int32_t mavlink_msg_high_latency_get_longitude(const mavlink_messa
  */
 static inline int16_t mavlink_msg_high_latency_get_altitude_amsl(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_int16_t(msg,  20);
+	return _MAV_RETURN_int16_t(msg,  20);
 }
 
 /**
@@ -624,7 +624,7 @@ static inline int16_t mavlink_msg_high_latency_get_altitude_amsl(const mavlink_m
  */
 static inline int16_t mavlink_msg_high_latency_get_altitude_sp(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_int16_t(msg,  22);
+	return _MAV_RETURN_int16_t(msg,  22);
 }
 
 /**
@@ -634,7 +634,7 @@ static inline int16_t mavlink_msg_high_latency_get_altitude_sp(const mavlink_mes
  */
 static inline uint8_t mavlink_msg_high_latency_get_airspeed(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  29);
+	return _MAV_RETURN_uint8_t(msg,  29);
 }
 
 /**
@@ -644,7 +644,7 @@ static inline uint8_t mavlink_msg_high_latency_get_airspeed(const mavlink_messag
  */
 static inline uint8_t mavlink_msg_high_latency_get_airspeed_sp(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  30);
+	return _MAV_RETURN_uint8_t(msg,  30);
 }
 
 /**
@@ -654,7 +654,7 @@ static inline uint8_t mavlink_msg_high_latency_get_airspeed_sp(const mavlink_mes
  */
 static inline uint8_t mavlink_msg_high_latency_get_groundspeed(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  31);
+	return _MAV_RETURN_uint8_t(msg,  31);
 }
 
 /**
@@ -664,7 +664,7 @@ static inline uint8_t mavlink_msg_high_latency_get_groundspeed(const mavlink_mes
  */
 static inline int8_t mavlink_msg_high_latency_get_climb_rate(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_int8_t(msg,  32);
+	return _MAV_RETURN_int8_t(msg,  32);
 }
 
 /**
@@ -674,7 +674,7 @@ static inline int8_t mavlink_msg_high_latency_get_climb_rate(const mavlink_messa
  */
 static inline uint8_t mavlink_msg_high_latency_get_gps_nsat(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  33);
+	return _MAV_RETURN_uint8_t(msg,  33);
 }
 
 /**
@@ -684,7 +684,7 @@ static inline uint8_t mavlink_msg_high_latency_get_gps_nsat(const mavlink_messag
  */
 static inline uint8_t mavlink_msg_high_latency_get_gps_fix_type(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  34);
+	return _MAV_RETURN_uint8_t(msg,  34);
 }
 
 /**
@@ -694,7 +694,7 @@ static inline uint8_t mavlink_msg_high_latency_get_gps_fix_type(const mavlink_me
  */
 static inline uint8_t mavlink_msg_high_latency_get_battery_remaining(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  35);
+	return _MAV_RETURN_uint8_t(msg,  35);
 }
 
 /**
@@ -704,7 +704,7 @@ static inline uint8_t mavlink_msg_high_latency_get_battery_remaining(const mavli
  */
 static inline int8_t mavlink_msg_high_latency_get_temperature(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_int8_t(msg,  36);
+	return _MAV_RETURN_int8_t(msg,  36);
 }
 
 /**
@@ -714,7 +714,7 @@ static inline int8_t mavlink_msg_high_latency_get_temperature(const mavlink_mess
  */
 static inline int8_t mavlink_msg_high_latency_get_temperature_air(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_int8_t(msg,  37);
+	return _MAV_RETURN_int8_t(msg,  37);
 }
 
 /**
@@ -724,7 +724,7 @@ static inline int8_t mavlink_msg_high_latency_get_temperature_air(const mavlink_
  */
 static inline uint8_t mavlink_msg_high_latency_get_failsafe(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  38);
+	return _MAV_RETURN_uint8_t(msg,  38);
 }
 
 /**
@@ -734,7 +734,7 @@ static inline uint8_t mavlink_msg_high_latency_get_failsafe(const mavlink_messag
  */
 static inline uint8_t mavlink_msg_high_latency_get_wp_num(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  39);
+	return _MAV_RETURN_uint8_t(msg,  39);
 }
 
 /**
@@ -744,7 +744,7 @@ static inline uint8_t mavlink_msg_high_latency_get_wp_num(const mavlink_message_
  */
 static inline uint16_t mavlink_msg_high_latency_get_wp_distance(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint16_t(msg,  24);
+	return _MAV_RETURN_uint16_t(msg,  24);
 }
 
 /**
@@ -756,33 +756,33 @@ static inline uint16_t mavlink_msg_high_latency_get_wp_distance(const mavlink_me
 static inline void mavlink_msg_high_latency_decode(const mavlink_message_t* msg, mavlink_high_latency_t* high_latency)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-    high_latency->custom_mode = mavlink_msg_high_latency_get_custom_mode(msg);
-    high_latency->latitude = mavlink_msg_high_latency_get_latitude(msg);
-    high_latency->longitude = mavlink_msg_high_latency_get_longitude(msg);
-    high_latency->roll = mavlink_msg_high_latency_get_roll(msg);
-    high_latency->pitch = mavlink_msg_high_latency_get_pitch(msg);
-    high_latency->heading = mavlink_msg_high_latency_get_heading(msg);
-    high_latency->heading_sp = mavlink_msg_high_latency_get_heading_sp(msg);
-    high_latency->altitude_amsl = mavlink_msg_high_latency_get_altitude_amsl(msg);
-    high_latency->altitude_sp = mavlink_msg_high_latency_get_altitude_sp(msg);
-    high_latency->wp_distance = mavlink_msg_high_latency_get_wp_distance(msg);
-    high_latency->base_mode = mavlink_msg_high_latency_get_base_mode(msg);
-    high_latency->landed_state = mavlink_msg_high_latency_get_landed_state(msg);
-    high_latency->throttle = mavlink_msg_high_latency_get_throttle(msg);
-    high_latency->airspeed = mavlink_msg_high_latency_get_airspeed(msg);
-    high_latency->airspeed_sp = mavlink_msg_high_latency_get_airspeed_sp(msg);
-    high_latency->groundspeed = mavlink_msg_high_latency_get_groundspeed(msg);
-    high_latency->climb_rate = mavlink_msg_high_latency_get_climb_rate(msg);
-    high_latency->gps_nsat = mavlink_msg_high_latency_get_gps_nsat(msg);
-    high_latency->gps_fix_type = mavlink_msg_high_latency_get_gps_fix_type(msg);
-    high_latency->battery_remaining = mavlink_msg_high_latency_get_battery_remaining(msg);
-    high_latency->temperature = mavlink_msg_high_latency_get_temperature(msg);
-    high_latency->temperature_air = mavlink_msg_high_latency_get_temperature_air(msg);
-    high_latency->failsafe = mavlink_msg_high_latency_get_failsafe(msg);
-    high_latency->wp_num = mavlink_msg_high_latency_get_wp_num(msg);
+	high_latency->custom_mode = mavlink_msg_high_latency_get_custom_mode(msg);
+	high_latency->latitude = mavlink_msg_high_latency_get_latitude(msg);
+	high_latency->longitude = mavlink_msg_high_latency_get_longitude(msg);
+	high_latency->roll = mavlink_msg_high_latency_get_roll(msg);
+	high_latency->pitch = mavlink_msg_high_latency_get_pitch(msg);
+	high_latency->heading = mavlink_msg_high_latency_get_heading(msg);
+	high_latency->heading_sp = mavlink_msg_high_latency_get_heading_sp(msg);
+	high_latency->altitude_amsl = mavlink_msg_high_latency_get_altitude_amsl(msg);
+	high_latency->altitude_sp = mavlink_msg_high_latency_get_altitude_sp(msg);
+	high_latency->wp_distance = mavlink_msg_high_latency_get_wp_distance(msg);
+	high_latency->base_mode = mavlink_msg_high_latency_get_base_mode(msg);
+	high_latency->landed_state = mavlink_msg_high_latency_get_landed_state(msg);
+	high_latency->throttle = mavlink_msg_high_latency_get_throttle(msg);
+	high_latency->airspeed = mavlink_msg_high_latency_get_airspeed(msg);
+	high_latency->airspeed_sp = mavlink_msg_high_latency_get_airspeed_sp(msg);
+	high_latency->groundspeed = mavlink_msg_high_latency_get_groundspeed(msg);
+	high_latency->climb_rate = mavlink_msg_high_latency_get_climb_rate(msg);
+	high_latency->gps_nsat = mavlink_msg_high_latency_get_gps_nsat(msg);
+	high_latency->gps_fix_type = mavlink_msg_high_latency_get_gps_fix_type(msg);
+	high_latency->battery_remaining = mavlink_msg_high_latency_get_battery_remaining(msg);
+	high_latency->temperature = mavlink_msg_high_latency_get_temperature(msg);
+	high_latency->temperature_air = mavlink_msg_high_latency_get_temperature_air(msg);
+	high_latency->failsafe = mavlink_msg_high_latency_get_failsafe(msg);
+	high_latency->wp_num = mavlink_msg_high_latency_get_wp_num(msg);
 #else
         uint8_t len = msg->len < MAVLINK_MSG_ID_HIGH_LATENCY_LEN? msg->len : MAVLINK_MSG_ID_HIGH_LATENCY_LEN;
         memset(high_latency, 0, MAVLINK_MSG_ID_HIGH_LATENCY_LEN);
-    memcpy(high_latency, _MAV_PAYLOAD(msg), len);
+	memcpy(high_latency, _MAV_PAYLOAD(msg), len);
 #endif
 }

@@ -5,7 +5,6 @@
 #error "The C-MAVLink implementation requires Visual Studio 2010 or greater"
 #endif
 
-#include <stdbool.h>
 #include <stdint.h>
 
 // Macro to define packed structures
