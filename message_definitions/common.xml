@@ -4001,7 +4001,7 @@
                <field type="uint8_t" name="data_type" enum="MIXER_DATA_TYPE">The requested data from the message</field>
           </message>
           <message id="270" name="MIXER_DATA">
-               <description>Mixer data emitted after a read request</description>
+               <description>Mixer data emitted after a read or set request</description>
                <field type="uint8_t" name="target_system">system ID of the target</field>
                <field type="uint8_t" name="target_component">component ID of the target</field>
                <field type="uint8_t" name="mixer_group" enum="MIXER_GROUP">Access to different sets of mixers ie. onboard, failsafe, uavcan etc..</field>
@@ -4009,7 +4009,8 @@
                <field type="uint8_t" name="mixer_sub_index">Index of the sub mixer in the mixer</field>
                <field type="uint8_t" name="parameter_index">Index of the parameter in the mixer or sub mixer</field>
                <field type="uint8_t" name="data_type" enum="MIXER_DATA_TYPE">Mixer data type</field>
-               <field type="float" name="param_value">Parameter or mixer data value</field>
+               <field type="int32_t" name="data_value">Integer mixer data</field>
+               <field type="float" name="param_value">Parameter value</field>
                <field type="uint8_t" name="param_type" enum="MAV_PARAM_TYPE">Parameter type: see the MAV_PARAM_TYPE enum for supported data types.</field>
           </message>
           <message id="271" name="MIXER_PARAMETER_SET">

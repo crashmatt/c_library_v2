@@ -32,10 +32,10 @@ typedef struct __mavlink_camera_settings_t {
 
 #if MAVLINK_COMMAND_24BIT
 #define MAVLINK_MESSAGE_INFO_CAMERA_SETTINGS { \
-	260, \
-	"CAMERA_SETTINGS", \
-	13, \
-	{  { "time_boot_ms", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, offsetof(mavlink_camera_settings_t, time_boot_ms) }, \
+    260, \
+    "CAMERA_SETTINGS", \
+    13, \
+    {  { "time_boot_ms", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, offsetof(mavlink_camera_settings_t, time_boot_ms) }, \
          { "aperture", NULL, MAVLINK_TYPE_FLOAT, 0, 4, offsetof(mavlink_camera_settings_t, aperture) }, \
          { "shutter_speed", NULL, MAVLINK_TYPE_FLOAT, 0, 8, offsetof(mavlink_camera_settings_t, shutter_speed) }, \
          { "iso_sensitivity", NULL, MAVLINK_TYPE_FLOAT, 0, 12, offsetof(mavlink_camera_settings_t, iso_sensitivity) }, \
@@ -52,9 +52,9 @@ typedef struct __mavlink_camera_settings_t {
 }
 #else
 #define MAVLINK_MESSAGE_INFO_CAMERA_SETTINGS { \
-	"CAMERA_SETTINGS", \
-	13, \
-	{  { "time_boot_ms", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, offsetof(mavlink_camera_settings_t, time_boot_ms) }, \
+    "CAMERA_SETTINGS", \
+    13, \
+    {  { "time_boot_ms", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, offsetof(mavlink_camera_settings_t, time_boot_ms) }, \
          { "aperture", NULL, MAVLINK_TYPE_FLOAT, 0, 4, offsetof(mavlink_camera_settings_t, aperture) }, \
          { "shutter_speed", NULL, MAVLINK_TYPE_FLOAT, 0, 8, offsetof(mavlink_camera_settings_t, shutter_speed) }, \
          { "iso_sensitivity", NULL, MAVLINK_TYPE_FLOAT, 0, 12, offsetof(mavlink_camera_settings_t, iso_sensitivity) }, \
@@ -93,45 +93,45 @@ typedef struct __mavlink_camera_settings_t {
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_camera_settings_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
-						       uint32_t time_boot_ms, uint8_t camera_id, float aperture, uint8_t aperture_locked, float shutter_speed, uint8_t shutter_speed_locked, float iso_sensitivity, uint8_t iso_sensitivity_locked, float white_balance, uint8_t white_balance_locked, uint8_t mode_id, uint8_t color_mode_id, uint8_t image_format_id)
+                               uint32_t time_boot_ms, uint8_t camera_id, float aperture, uint8_t aperture_locked, float shutter_speed, uint8_t shutter_speed_locked, float iso_sensitivity, uint8_t iso_sensitivity_locked, float white_balance, uint8_t white_balance_locked, uint8_t mode_id, uint8_t color_mode_id, uint8_t image_format_id)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-	char buf[MAVLINK_MSG_ID_CAMERA_SETTINGS_LEN];
-	_mav_put_uint32_t(buf, 0, time_boot_ms);
-	_mav_put_float(buf, 4, aperture);
-	_mav_put_float(buf, 8, shutter_speed);
-	_mav_put_float(buf, 12, iso_sensitivity);
-	_mav_put_float(buf, 16, white_balance);
-	_mav_put_uint8_t(buf, 20, camera_id);
-	_mav_put_uint8_t(buf, 21, aperture_locked);
-	_mav_put_uint8_t(buf, 22, shutter_speed_locked);
-	_mav_put_uint8_t(buf, 23, iso_sensitivity_locked);
-	_mav_put_uint8_t(buf, 24, white_balance_locked);
-	_mav_put_uint8_t(buf, 25, mode_id);
-	_mav_put_uint8_t(buf, 26, color_mode_id);
-	_mav_put_uint8_t(buf, 27, image_format_id);
+    char buf[MAVLINK_MSG_ID_CAMERA_SETTINGS_LEN];
+    _mav_put_uint32_t(buf, 0, time_boot_ms);
+    _mav_put_float(buf, 4, aperture);
+    _mav_put_float(buf, 8, shutter_speed);
+    _mav_put_float(buf, 12, iso_sensitivity);
+    _mav_put_float(buf, 16, white_balance);
+    _mav_put_uint8_t(buf, 20, camera_id);
+    _mav_put_uint8_t(buf, 21, aperture_locked);
+    _mav_put_uint8_t(buf, 22, shutter_speed_locked);
+    _mav_put_uint8_t(buf, 23, iso_sensitivity_locked);
+    _mav_put_uint8_t(buf, 24, white_balance_locked);
+    _mav_put_uint8_t(buf, 25, mode_id);
+    _mav_put_uint8_t(buf, 26, color_mode_id);
+    _mav_put_uint8_t(buf, 27, image_format_id);
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_CAMERA_SETTINGS_LEN);
 #else
-	mavlink_camera_settings_t packet;
-	packet.time_boot_ms = time_boot_ms;
-	packet.aperture = aperture;
-	packet.shutter_speed = shutter_speed;
-	packet.iso_sensitivity = iso_sensitivity;
-	packet.white_balance = white_balance;
-	packet.camera_id = camera_id;
-	packet.aperture_locked = aperture_locked;
-	packet.shutter_speed_locked = shutter_speed_locked;
-	packet.iso_sensitivity_locked = iso_sensitivity_locked;
-	packet.white_balance_locked = white_balance_locked;
-	packet.mode_id = mode_id;
-	packet.color_mode_id = color_mode_id;
-	packet.image_format_id = image_format_id;
+    mavlink_camera_settings_t packet;
+    packet.time_boot_ms = time_boot_ms;
+    packet.aperture = aperture;
+    packet.shutter_speed = shutter_speed;
+    packet.iso_sensitivity = iso_sensitivity;
+    packet.white_balance = white_balance;
+    packet.camera_id = camera_id;
+    packet.aperture_locked = aperture_locked;
+    packet.shutter_speed_locked = shutter_speed_locked;
+    packet.iso_sensitivity_locked = iso_sensitivity_locked;
+    packet.white_balance_locked = white_balance_locked;
+    packet.mode_id = mode_id;
+    packet.color_mode_id = color_mode_id;
+    packet.image_format_id = image_format_id;
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_CAMERA_SETTINGS_LEN);
 #endif
 
-	msg->msgid = MAVLINK_MSG_ID_CAMERA_SETTINGS;
+    msg->msgid = MAVLINK_MSG_ID_CAMERA_SETTINGS;
     return mavlink_finalize_message(msg, system_id, component_id, MAVLINK_MSG_ID_CAMERA_SETTINGS_MIN_LEN, MAVLINK_MSG_ID_CAMERA_SETTINGS_LEN, MAVLINK_MSG_ID_CAMERA_SETTINGS_CRC);
 }
 
@@ -157,46 +157,46 @@ static inline uint16_t mavlink_msg_camera_settings_pack(uint8_t system_id, uint8
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_camera_settings_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
-							   mavlink_message_t* msg,
-						           uint32_t time_boot_ms,uint8_t camera_id,float aperture,uint8_t aperture_locked,float shutter_speed,uint8_t shutter_speed_locked,float iso_sensitivity,uint8_t iso_sensitivity_locked,float white_balance,uint8_t white_balance_locked,uint8_t mode_id,uint8_t color_mode_id,uint8_t image_format_id)
+                               mavlink_message_t* msg,
+                                   uint32_t time_boot_ms,uint8_t camera_id,float aperture,uint8_t aperture_locked,float shutter_speed,uint8_t shutter_speed_locked,float iso_sensitivity,uint8_t iso_sensitivity_locked,float white_balance,uint8_t white_balance_locked,uint8_t mode_id,uint8_t color_mode_id,uint8_t image_format_id)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-	char buf[MAVLINK_MSG_ID_CAMERA_SETTINGS_LEN];
-	_mav_put_uint32_t(buf, 0, time_boot_ms);
-	_mav_put_float(buf, 4, aperture);
-	_mav_put_float(buf, 8, shutter_speed);
-	_mav_put_float(buf, 12, iso_sensitivity);
-	_mav_put_float(buf, 16, white_balance);
-	_mav_put_uint8_t(buf, 20, camera_id);
-	_mav_put_uint8_t(buf, 21, aperture_locked);
-	_mav_put_uint8_t(buf, 22, shutter_speed_locked);
-	_mav_put_uint8_t(buf, 23, iso_sensitivity_locked);
-	_mav_put_uint8_t(buf, 24, white_balance_locked);
-	_mav_put_uint8_t(buf, 25, mode_id);
-	_mav_put_uint8_t(buf, 26, color_mode_id);
-	_mav_put_uint8_t(buf, 27, image_format_id);
+    char buf[MAVLINK_MSG_ID_CAMERA_SETTINGS_LEN];
+    _mav_put_uint32_t(buf, 0, time_boot_ms);
+    _mav_put_float(buf, 4, aperture);
+    _mav_put_float(buf, 8, shutter_speed);
+    _mav_put_float(buf, 12, iso_sensitivity);
+    _mav_put_float(buf, 16, white_balance);
+    _mav_put_uint8_t(buf, 20, camera_id);
+    _mav_put_uint8_t(buf, 21, aperture_locked);
+    _mav_put_uint8_t(buf, 22, shutter_speed_locked);
+    _mav_put_uint8_t(buf, 23, iso_sensitivity_locked);
+    _mav_put_uint8_t(buf, 24, white_balance_locked);
+    _mav_put_uint8_t(buf, 25, mode_id);
+    _mav_put_uint8_t(buf, 26, color_mode_id);
+    _mav_put_uint8_t(buf, 27, image_format_id);
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_CAMERA_SETTINGS_LEN);
 #else
-	mavlink_camera_settings_t packet;
-	packet.time_boot_ms = time_boot_ms;
-	packet.aperture = aperture;
-	packet.shutter_speed = shutter_speed;
-	packet.iso_sensitivity = iso_sensitivity;
-	packet.white_balance = white_balance;
-	packet.camera_id = camera_id;
-	packet.aperture_locked = aperture_locked;
-	packet.shutter_speed_locked = shutter_speed_locked;
-	packet.iso_sensitivity_locked = iso_sensitivity_locked;
-	packet.white_balance_locked = white_balance_locked;
-	packet.mode_id = mode_id;
-	packet.color_mode_id = color_mode_id;
-	packet.image_format_id = image_format_id;
+    mavlink_camera_settings_t packet;
+    packet.time_boot_ms = time_boot_ms;
+    packet.aperture = aperture;
+    packet.shutter_speed = shutter_speed;
+    packet.iso_sensitivity = iso_sensitivity;
+    packet.white_balance = white_balance;
+    packet.camera_id = camera_id;
+    packet.aperture_locked = aperture_locked;
+    packet.shutter_speed_locked = shutter_speed_locked;
+    packet.iso_sensitivity_locked = iso_sensitivity_locked;
+    packet.white_balance_locked = white_balance_locked;
+    packet.mode_id = mode_id;
+    packet.color_mode_id = color_mode_id;
+    packet.image_format_id = image_format_id;
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_CAMERA_SETTINGS_LEN);
 #endif
 
-	msg->msgid = MAVLINK_MSG_ID_CAMERA_SETTINGS;
+    msg->msgid = MAVLINK_MSG_ID_CAMERA_SETTINGS;
     return mavlink_finalize_message_chan(msg, system_id, component_id, chan, MAVLINK_MSG_ID_CAMERA_SETTINGS_MIN_LEN, MAVLINK_MSG_ID_CAMERA_SETTINGS_LEN, MAVLINK_MSG_ID_CAMERA_SETTINGS_CRC);
 }
 
@@ -210,7 +210,7 @@ static inline uint16_t mavlink_msg_camera_settings_pack_chan(uint8_t system_id, 
  */
 static inline uint16_t mavlink_msg_camera_settings_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_camera_settings_t* camera_settings)
 {
-	return mavlink_msg_camera_settings_pack(system_id, component_id, msg, camera_settings->time_boot_ms, camera_settings->camera_id, camera_settings->aperture, camera_settings->aperture_locked, camera_settings->shutter_speed, camera_settings->shutter_speed_locked, camera_settings->iso_sensitivity, camera_settings->iso_sensitivity_locked, camera_settings->white_balance, camera_settings->white_balance_locked, camera_settings->mode_id, camera_settings->color_mode_id, camera_settings->image_format_id);
+    return mavlink_msg_camera_settings_pack(system_id, component_id, msg, camera_settings->time_boot_ms, camera_settings->camera_id, camera_settings->aperture, camera_settings->aperture_locked, camera_settings->shutter_speed, camera_settings->shutter_speed_locked, camera_settings->iso_sensitivity, camera_settings->iso_sensitivity_locked, camera_settings->white_balance, camera_settings->white_balance_locked, camera_settings->mode_id, camera_settings->color_mode_id, camera_settings->image_format_id);
 }
 
 /**
@@ -224,7 +224,7 @@ static inline uint16_t mavlink_msg_camera_settings_encode(uint8_t system_id, uin
  */
 static inline uint16_t mavlink_msg_camera_settings_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_camera_settings_t* camera_settings)
 {
-	return mavlink_msg_camera_settings_pack_chan(system_id, component_id, chan, msg, camera_settings->time_boot_ms, camera_settings->camera_id, camera_settings->aperture, camera_settings->aperture_locked, camera_settings->shutter_speed, camera_settings->shutter_speed_locked, camera_settings->iso_sensitivity, camera_settings->iso_sensitivity_locked, camera_settings->white_balance, camera_settings->white_balance_locked, camera_settings->mode_id, camera_settings->color_mode_id, camera_settings->image_format_id);
+    return mavlink_msg_camera_settings_pack_chan(system_id, component_id, chan, msg, camera_settings->time_boot_ms, camera_settings->camera_id, camera_settings->aperture, camera_settings->aperture_locked, camera_settings->shutter_speed, camera_settings->shutter_speed_locked, camera_settings->iso_sensitivity, camera_settings->iso_sensitivity_locked, camera_settings->white_balance, camera_settings->white_balance_locked, camera_settings->mode_id, camera_settings->color_mode_id, camera_settings->image_format_id);
 }
 
 /**
@@ -250,37 +250,37 @@ static inline uint16_t mavlink_msg_camera_settings_encode_chan(uint8_t system_id
 static inline void mavlink_msg_camera_settings_send(mavlink_channel_t chan, uint32_t time_boot_ms, uint8_t camera_id, float aperture, uint8_t aperture_locked, float shutter_speed, uint8_t shutter_speed_locked, float iso_sensitivity, uint8_t iso_sensitivity_locked, float white_balance, uint8_t white_balance_locked, uint8_t mode_id, uint8_t color_mode_id, uint8_t image_format_id)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-	char buf[MAVLINK_MSG_ID_CAMERA_SETTINGS_LEN];
-	_mav_put_uint32_t(buf, 0, time_boot_ms);
-	_mav_put_float(buf, 4, aperture);
-	_mav_put_float(buf, 8, shutter_speed);
-	_mav_put_float(buf, 12, iso_sensitivity);
-	_mav_put_float(buf, 16, white_balance);
-	_mav_put_uint8_t(buf, 20, camera_id);
-	_mav_put_uint8_t(buf, 21, aperture_locked);
-	_mav_put_uint8_t(buf, 22, shutter_speed_locked);
-	_mav_put_uint8_t(buf, 23, iso_sensitivity_locked);
-	_mav_put_uint8_t(buf, 24, white_balance_locked);
-	_mav_put_uint8_t(buf, 25, mode_id);
-	_mav_put_uint8_t(buf, 26, color_mode_id);
-	_mav_put_uint8_t(buf, 27, image_format_id);
+    char buf[MAVLINK_MSG_ID_CAMERA_SETTINGS_LEN];
+    _mav_put_uint32_t(buf, 0, time_boot_ms);
+    _mav_put_float(buf, 4, aperture);
+    _mav_put_float(buf, 8, shutter_speed);
+    _mav_put_float(buf, 12, iso_sensitivity);
+    _mav_put_float(buf, 16, white_balance);
+    _mav_put_uint8_t(buf, 20, camera_id);
+    _mav_put_uint8_t(buf, 21, aperture_locked);
+    _mav_put_uint8_t(buf, 22, shutter_speed_locked);
+    _mav_put_uint8_t(buf, 23, iso_sensitivity_locked);
+    _mav_put_uint8_t(buf, 24, white_balance_locked);
+    _mav_put_uint8_t(buf, 25, mode_id);
+    _mav_put_uint8_t(buf, 26, color_mode_id);
+    _mav_put_uint8_t(buf, 27, image_format_id);
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_CAMERA_SETTINGS, buf, MAVLINK_MSG_ID_CAMERA_SETTINGS_MIN_LEN, MAVLINK_MSG_ID_CAMERA_SETTINGS_LEN, MAVLINK_MSG_ID_CAMERA_SETTINGS_CRC);
 #else
-	mavlink_camera_settings_t packet;
-	packet.time_boot_ms = time_boot_ms;
-	packet.aperture = aperture;
-	packet.shutter_speed = shutter_speed;
-	packet.iso_sensitivity = iso_sensitivity;
-	packet.white_balance = white_balance;
-	packet.camera_id = camera_id;
-	packet.aperture_locked = aperture_locked;
-	packet.shutter_speed_locked = shutter_speed_locked;
-	packet.iso_sensitivity_locked = iso_sensitivity_locked;
-	packet.white_balance_locked = white_balance_locked;
-	packet.mode_id = mode_id;
-	packet.color_mode_id = color_mode_id;
-	packet.image_format_id = image_format_id;
+    mavlink_camera_settings_t packet;
+    packet.time_boot_ms = time_boot_ms;
+    packet.aperture = aperture;
+    packet.shutter_speed = shutter_speed;
+    packet.iso_sensitivity = iso_sensitivity;
+    packet.white_balance = white_balance;
+    packet.camera_id = camera_id;
+    packet.aperture_locked = aperture_locked;
+    packet.shutter_speed_locked = shutter_speed_locked;
+    packet.iso_sensitivity_locked = iso_sensitivity_locked;
+    packet.white_balance_locked = white_balance_locked;
+    packet.mode_id = mode_id;
+    packet.color_mode_id = color_mode_id;
+    packet.image_format_id = image_format_id;
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_CAMERA_SETTINGS, (const char *)&packet, MAVLINK_MSG_ID_CAMERA_SETTINGS_MIN_LEN, MAVLINK_MSG_ID_CAMERA_SETTINGS_LEN, MAVLINK_MSG_ID_CAMERA_SETTINGS_CRC);
 #endif
@@ -311,37 +311,37 @@ static inline void mavlink_msg_camera_settings_send_struct(mavlink_channel_t cha
 static inline void mavlink_msg_camera_settings_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  uint32_t time_boot_ms, uint8_t camera_id, float aperture, uint8_t aperture_locked, float shutter_speed, uint8_t shutter_speed_locked, float iso_sensitivity, uint8_t iso_sensitivity_locked, float white_balance, uint8_t white_balance_locked, uint8_t mode_id, uint8_t color_mode_id, uint8_t image_format_id)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-	char *buf = (char *)msgbuf;
-	_mav_put_uint32_t(buf, 0, time_boot_ms);
-	_mav_put_float(buf, 4, aperture);
-	_mav_put_float(buf, 8, shutter_speed);
-	_mav_put_float(buf, 12, iso_sensitivity);
-	_mav_put_float(buf, 16, white_balance);
-	_mav_put_uint8_t(buf, 20, camera_id);
-	_mav_put_uint8_t(buf, 21, aperture_locked);
-	_mav_put_uint8_t(buf, 22, shutter_speed_locked);
-	_mav_put_uint8_t(buf, 23, iso_sensitivity_locked);
-	_mav_put_uint8_t(buf, 24, white_balance_locked);
-	_mav_put_uint8_t(buf, 25, mode_id);
-	_mav_put_uint8_t(buf, 26, color_mode_id);
-	_mav_put_uint8_t(buf, 27, image_format_id);
+    char *buf = (char *)msgbuf;
+    _mav_put_uint32_t(buf, 0, time_boot_ms);
+    _mav_put_float(buf, 4, aperture);
+    _mav_put_float(buf, 8, shutter_speed);
+    _mav_put_float(buf, 12, iso_sensitivity);
+    _mav_put_float(buf, 16, white_balance);
+    _mav_put_uint8_t(buf, 20, camera_id);
+    _mav_put_uint8_t(buf, 21, aperture_locked);
+    _mav_put_uint8_t(buf, 22, shutter_speed_locked);
+    _mav_put_uint8_t(buf, 23, iso_sensitivity_locked);
+    _mav_put_uint8_t(buf, 24, white_balance_locked);
+    _mav_put_uint8_t(buf, 25, mode_id);
+    _mav_put_uint8_t(buf, 26, color_mode_id);
+    _mav_put_uint8_t(buf, 27, image_format_id);
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_CAMERA_SETTINGS, buf, MAVLINK_MSG_ID_CAMERA_SETTINGS_MIN_LEN, MAVLINK_MSG_ID_CAMERA_SETTINGS_LEN, MAVLINK_MSG_ID_CAMERA_SETTINGS_CRC);
 #else
-	mavlink_camera_settings_t *packet = (mavlink_camera_settings_t *)msgbuf;
-	packet->time_boot_ms = time_boot_ms;
-	packet->aperture = aperture;
-	packet->shutter_speed = shutter_speed;
-	packet->iso_sensitivity = iso_sensitivity;
-	packet->white_balance = white_balance;
-	packet->camera_id = camera_id;
-	packet->aperture_locked = aperture_locked;
-	packet->shutter_speed_locked = shutter_speed_locked;
-	packet->iso_sensitivity_locked = iso_sensitivity_locked;
-	packet->white_balance_locked = white_balance_locked;
-	packet->mode_id = mode_id;
-	packet->color_mode_id = color_mode_id;
-	packet->image_format_id = image_format_id;
+    mavlink_camera_settings_t *packet = (mavlink_camera_settings_t *)msgbuf;
+    packet->time_boot_ms = time_boot_ms;
+    packet->aperture = aperture;
+    packet->shutter_speed = shutter_speed;
+    packet->iso_sensitivity = iso_sensitivity;
+    packet->white_balance = white_balance;
+    packet->camera_id = camera_id;
+    packet->aperture_locked = aperture_locked;
+    packet->shutter_speed_locked = shutter_speed_locked;
+    packet->iso_sensitivity_locked = iso_sensitivity_locked;
+    packet->white_balance_locked = white_balance_locked;
+    packet->mode_id = mode_id;
+    packet->color_mode_id = color_mode_id;
+    packet->image_format_id = image_format_id;
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_CAMERA_SETTINGS, (const char *)packet, MAVLINK_MSG_ID_CAMERA_SETTINGS_MIN_LEN, MAVLINK_MSG_ID_CAMERA_SETTINGS_LEN, MAVLINK_MSG_ID_CAMERA_SETTINGS_CRC);
 #endif
@@ -360,7 +360,7 @@ static inline void mavlink_msg_camera_settings_send_buf(mavlink_message_t *msgbu
  */
 static inline uint32_t mavlink_msg_camera_settings_get_time_boot_ms(const mavlink_message_t* msg)
 {
-	return _MAV_RETURN_uint32_t(msg,  0);
+    return _MAV_RETURN_uint32_t(msg,  0);
 }
 
 /**
@@ -370,7 +370,7 @@ static inline uint32_t mavlink_msg_camera_settings_get_time_boot_ms(const mavlin
  */
 static inline uint8_t mavlink_msg_camera_settings_get_camera_id(const mavlink_message_t* msg)
 {
-	return _MAV_RETURN_uint8_t(msg,  20);
+    return _MAV_RETURN_uint8_t(msg,  20);
 }
 
 /**
@@ -380,7 +380,7 @@ static inline uint8_t mavlink_msg_camera_settings_get_camera_id(const mavlink_me
  */
 static inline float mavlink_msg_camera_settings_get_aperture(const mavlink_message_t* msg)
 {
-	return _MAV_RETURN_float(msg,  4);
+    return _MAV_RETURN_float(msg,  4);
 }
 
 /**
@@ -390,7 +390,7 @@ static inline float mavlink_msg_camera_settings_get_aperture(const mavlink_messa
  */
 static inline uint8_t mavlink_msg_camera_settings_get_aperture_locked(const mavlink_message_t* msg)
 {
-	return _MAV_RETURN_uint8_t(msg,  21);
+    return _MAV_RETURN_uint8_t(msg,  21);
 }
 
 /**
@@ -400,7 +400,7 @@ static inline uint8_t mavlink_msg_camera_settings_get_aperture_locked(const mavl
  */
 static inline float mavlink_msg_camera_settings_get_shutter_speed(const mavlink_message_t* msg)
 {
-	return _MAV_RETURN_float(msg,  8);
+    return _MAV_RETURN_float(msg,  8);
 }
 
 /**
@@ -410,7 +410,7 @@ static inline float mavlink_msg_camera_settings_get_shutter_speed(const mavlink_
  */
 static inline uint8_t mavlink_msg_camera_settings_get_shutter_speed_locked(const mavlink_message_t* msg)
 {
-	return _MAV_RETURN_uint8_t(msg,  22);
+    return _MAV_RETURN_uint8_t(msg,  22);
 }
 
 /**
@@ -420,7 +420,7 @@ static inline uint8_t mavlink_msg_camera_settings_get_shutter_speed_locked(const
  */
 static inline float mavlink_msg_camera_settings_get_iso_sensitivity(const mavlink_message_t* msg)
 {
-	return _MAV_RETURN_float(msg,  12);
+    return _MAV_RETURN_float(msg,  12);
 }
 
 /**
@@ -430,7 +430,7 @@ static inline float mavlink_msg_camera_settings_get_iso_sensitivity(const mavlin
  */
 static inline uint8_t mavlink_msg_camera_settings_get_iso_sensitivity_locked(const mavlink_message_t* msg)
 {
-	return _MAV_RETURN_uint8_t(msg,  23);
+    return _MAV_RETURN_uint8_t(msg,  23);
 }
 
 /**
@@ -440,7 +440,7 @@ static inline uint8_t mavlink_msg_camera_settings_get_iso_sensitivity_locked(con
  */
 static inline float mavlink_msg_camera_settings_get_white_balance(const mavlink_message_t* msg)
 {
-	return _MAV_RETURN_float(msg,  16);
+    return _MAV_RETURN_float(msg,  16);
 }
 
 /**
@@ -450,7 +450,7 @@ static inline float mavlink_msg_camera_settings_get_white_balance(const mavlink_
  */
 static inline uint8_t mavlink_msg_camera_settings_get_white_balance_locked(const mavlink_message_t* msg)
 {
-	return _MAV_RETURN_uint8_t(msg,  24);
+    return _MAV_RETURN_uint8_t(msg,  24);
 }
 
 /**
@@ -460,7 +460,7 @@ static inline uint8_t mavlink_msg_camera_settings_get_white_balance_locked(const
  */
 static inline uint8_t mavlink_msg_camera_settings_get_mode_id(const mavlink_message_t* msg)
 {
-	return _MAV_RETURN_uint8_t(msg,  25);
+    return _MAV_RETURN_uint8_t(msg,  25);
 }
 
 /**
@@ -470,7 +470,7 @@ static inline uint8_t mavlink_msg_camera_settings_get_mode_id(const mavlink_mess
  */
 static inline uint8_t mavlink_msg_camera_settings_get_color_mode_id(const mavlink_message_t* msg)
 {
-	return _MAV_RETURN_uint8_t(msg,  26);
+    return _MAV_RETURN_uint8_t(msg,  26);
 }
 
 /**
@@ -480,7 +480,7 @@ static inline uint8_t mavlink_msg_camera_settings_get_color_mode_id(const mavlin
  */
 static inline uint8_t mavlink_msg_camera_settings_get_image_format_id(const mavlink_message_t* msg)
 {
-	return _MAV_RETURN_uint8_t(msg,  27);
+    return _MAV_RETURN_uint8_t(msg,  27);
 }
 
 /**
@@ -492,22 +492,22 @@ static inline uint8_t mavlink_msg_camera_settings_get_image_format_id(const mavl
 static inline void mavlink_msg_camera_settings_decode(const mavlink_message_t* msg, mavlink_camera_settings_t* camera_settings)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-	camera_settings->time_boot_ms = mavlink_msg_camera_settings_get_time_boot_ms(msg);
-	camera_settings->aperture = mavlink_msg_camera_settings_get_aperture(msg);
-	camera_settings->shutter_speed = mavlink_msg_camera_settings_get_shutter_speed(msg);
-	camera_settings->iso_sensitivity = mavlink_msg_camera_settings_get_iso_sensitivity(msg);
-	camera_settings->white_balance = mavlink_msg_camera_settings_get_white_balance(msg);
-	camera_settings->camera_id = mavlink_msg_camera_settings_get_camera_id(msg);
-	camera_settings->aperture_locked = mavlink_msg_camera_settings_get_aperture_locked(msg);
-	camera_settings->shutter_speed_locked = mavlink_msg_camera_settings_get_shutter_speed_locked(msg);
-	camera_settings->iso_sensitivity_locked = mavlink_msg_camera_settings_get_iso_sensitivity_locked(msg);
-	camera_settings->white_balance_locked = mavlink_msg_camera_settings_get_white_balance_locked(msg);
-	camera_settings->mode_id = mavlink_msg_camera_settings_get_mode_id(msg);
-	camera_settings->color_mode_id = mavlink_msg_camera_settings_get_color_mode_id(msg);
-	camera_settings->image_format_id = mavlink_msg_camera_settings_get_image_format_id(msg);
+    camera_settings->time_boot_ms = mavlink_msg_camera_settings_get_time_boot_ms(msg);
+    camera_settings->aperture = mavlink_msg_camera_settings_get_aperture(msg);
+    camera_settings->shutter_speed = mavlink_msg_camera_settings_get_shutter_speed(msg);
+    camera_settings->iso_sensitivity = mavlink_msg_camera_settings_get_iso_sensitivity(msg);
+    camera_settings->white_balance = mavlink_msg_camera_settings_get_white_balance(msg);
+    camera_settings->camera_id = mavlink_msg_camera_settings_get_camera_id(msg);
+    camera_settings->aperture_locked = mavlink_msg_camera_settings_get_aperture_locked(msg);
+    camera_settings->shutter_speed_locked = mavlink_msg_camera_settings_get_shutter_speed_locked(msg);
+    camera_settings->iso_sensitivity_locked = mavlink_msg_camera_settings_get_iso_sensitivity_locked(msg);
+    camera_settings->white_balance_locked = mavlink_msg_camera_settings_get_white_balance_locked(msg);
+    camera_settings->mode_id = mavlink_msg_camera_settings_get_mode_id(msg);
+    camera_settings->color_mode_id = mavlink_msg_camera_settings_get_color_mode_id(msg);
+    camera_settings->image_format_id = mavlink_msg_camera_settings_get_image_format_id(msg);
 #else
         uint8_t len = msg->len < MAVLINK_MSG_ID_CAMERA_SETTINGS_LEN? msg->len : MAVLINK_MSG_ID_CAMERA_SETTINGS_LEN;
         memset(camera_settings, 0, MAVLINK_MSG_ID_CAMERA_SETTINGS_LEN);
-	memcpy(camera_settings, _MAV_PAYLOAD(msg), len);
+    memcpy(camera_settings, _MAV_PAYLOAD(msg), len);
 #endif
 }

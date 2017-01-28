@@ -27,10 +27,10 @@ typedef struct __mavlink_storage_information_t {
 
 #if MAVLINK_COMMAND_24BIT
 #define MAVLINK_MESSAGE_INFO_STORAGE_INFORMATION { \
-	261, \
-	"STORAGE_INFORMATION", \
-	8, \
-	{  { "time_boot_ms", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, offsetof(mavlink_storage_information_t, time_boot_ms) }, \
+    261, \
+    "STORAGE_INFORMATION", \
+    8, \
+    {  { "time_boot_ms", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, offsetof(mavlink_storage_information_t, time_boot_ms) }, \
          { "total_capacity", NULL, MAVLINK_TYPE_FLOAT, 0, 4, offsetof(mavlink_storage_information_t, total_capacity) }, \
          { "used_capacity", NULL, MAVLINK_TYPE_FLOAT, 0, 8, offsetof(mavlink_storage_information_t, used_capacity) }, \
          { "available_capacity", NULL, MAVLINK_TYPE_FLOAT, 0, 12, offsetof(mavlink_storage_information_t, available_capacity) }, \
@@ -42,9 +42,9 @@ typedef struct __mavlink_storage_information_t {
 }
 #else
 #define MAVLINK_MESSAGE_INFO_STORAGE_INFORMATION { \
-	"STORAGE_INFORMATION", \
-	8, \
-	{  { "time_boot_ms", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, offsetof(mavlink_storage_information_t, time_boot_ms) }, \
+    "STORAGE_INFORMATION", \
+    8, \
+    {  { "time_boot_ms", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, offsetof(mavlink_storage_information_t, time_boot_ms) }, \
          { "total_capacity", NULL, MAVLINK_TYPE_FLOAT, 0, 4, offsetof(mavlink_storage_information_t, total_capacity) }, \
          { "used_capacity", NULL, MAVLINK_TYPE_FLOAT, 0, 8, offsetof(mavlink_storage_information_t, used_capacity) }, \
          { "available_capacity", NULL, MAVLINK_TYPE_FLOAT, 0, 12, offsetof(mavlink_storage_information_t, available_capacity) }, \
@@ -73,35 +73,35 @@ typedef struct __mavlink_storage_information_t {
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_storage_information_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
-						       uint32_t time_boot_ms, uint8_t storage_id, uint8_t status, float total_capacity, float used_capacity, float available_capacity, float read_speed, float write_speed)
+                               uint32_t time_boot_ms, uint8_t storage_id, uint8_t status, float total_capacity, float used_capacity, float available_capacity, float read_speed, float write_speed)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-	char buf[MAVLINK_MSG_ID_STORAGE_INFORMATION_LEN];
-	_mav_put_uint32_t(buf, 0, time_boot_ms);
-	_mav_put_float(buf, 4, total_capacity);
-	_mav_put_float(buf, 8, used_capacity);
-	_mav_put_float(buf, 12, available_capacity);
-	_mav_put_float(buf, 16, read_speed);
-	_mav_put_float(buf, 20, write_speed);
-	_mav_put_uint8_t(buf, 24, storage_id);
-	_mav_put_uint8_t(buf, 25, status);
+    char buf[MAVLINK_MSG_ID_STORAGE_INFORMATION_LEN];
+    _mav_put_uint32_t(buf, 0, time_boot_ms);
+    _mav_put_float(buf, 4, total_capacity);
+    _mav_put_float(buf, 8, used_capacity);
+    _mav_put_float(buf, 12, available_capacity);
+    _mav_put_float(buf, 16, read_speed);
+    _mav_put_float(buf, 20, write_speed);
+    _mav_put_uint8_t(buf, 24, storage_id);
+    _mav_put_uint8_t(buf, 25, status);
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_STORAGE_INFORMATION_LEN);
 #else
-	mavlink_storage_information_t packet;
-	packet.time_boot_ms = time_boot_ms;
-	packet.total_capacity = total_capacity;
-	packet.used_capacity = used_capacity;
-	packet.available_capacity = available_capacity;
-	packet.read_speed = read_speed;
-	packet.write_speed = write_speed;
-	packet.storage_id = storage_id;
-	packet.status = status;
+    mavlink_storage_information_t packet;
+    packet.time_boot_ms = time_boot_ms;
+    packet.total_capacity = total_capacity;
+    packet.used_capacity = used_capacity;
+    packet.available_capacity = available_capacity;
+    packet.read_speed = read_speed;
+    packet.write_speed = write_speed;
+    packet.storage_id = storage_id;
+    packet.status = status;
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_STORAGE_INFORMATION_LEN);
 #endif
 
-	msg->msgid = MAVLINK_MSG_ID_STORAGE_INFORMATION;
+    msg->msgid = MAVLINK_MSG_ID_STORAGE_INFORMATION;
     return mavlink_finalize_message(msg, system_id, component_id, MAVLINK_MSG_ID_STORAGE_INFORMATION_MIN_LEN, MAVLINK_MSG_ID_STORAGE_INFORMATION_LEN, MAVLINK_MSG_ID_STORAGE_INFORMATION_CRC);
 }
 
@@ -122,36 +122,36 @@ static inline uint16_t mavlink_msg_storage_information_pack(uint8_t system_id, u
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_storage_information_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
-							   mavlink_message_t* msg,
-						           uint32_t time_boot_ms,uint8_t storage_id,uint8_t status,float total_capacity,float used_capacity,float available_capacity,float read_speed,float write_speed)
+                               mavlink_message_t* msg,
+                                   uint32_t time_boot_ms,uint8_t storage_id,uint8_t status,float total_capacity,float used_capacity,float available_capacity,float read_speed,float write_speed)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-	char buf[MAVLINK_MSG_ID_STORAGE_INFORMATION_LEN];
-	_mav_put_uint32_t(buf, 0, time_boot_ms);
-	_mav_put_float(buf, 4, total_capacity);
-	_mav_put_float(buf, 8, used_capacity);
-	_mav_put_float(buf, 12, available_capacity);
-	_mav_put_float(buf, 16, read_speed);
-	_mav_put_float(buf, 20, write_speed);
-	_mav_put_uint8_t(buf, 24, storage_id);
-	_mav_put_uint8_t(buf, 25, status);
+    char buf[MAVLINK_MSG_ID_STORAGE_INFORMATION_LEN];
+    _mav_put_uint32_t(buf, 0, time_boot_ms);
+    _mav_put_float(buf, 4, total_capacity);
+    _mav_put_float(buf, 8, used_capacity);
+    _mav_put_float(buf, 12, available_capacity);
+    _mav_put_float(buf, 16, read_speed);
+    _mav_put_float(buf, 20, write_speed);
+    _mav_put_uint8_t(buf, 24, storage_id);
+    _mav_put_uint8_t(buf, 25, status);
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_STORAGE_INFORMATION_LEN);
 #else
-	mavlink_storage_information_t packet;
-	packet.time_boot_ms = time_boot_ms;
-	packet.total_capacity = total_capacity;
-	packet.used_capacity = used_capacity;
-	packet.available_capacity = available_capacity;
-	packet.read_speed = read_speed;
-	packet.write_speed = write_speed;
-	packet.storage_id = storage_id;
-	packet.status = status;
+    mavlink_storage_information_t packet;
+    packet.time_boot_ms = time_boot_ms;
+    packet.total_capacity = total_capacity;
+    packet.used_capacity = used_capacity;
+    packet.available_capacity = available_capacity;
+    packet.read_speed = read_speed;
+    packet.write_speed = write_speed;
+    packet.storage_id = storage_id;
+    packet.status = status;
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_STORAGE_INFORMATION_LEN);
 #endif
 
-	msg->msgid = MAVLINK_MSG_ID_STORAGE_INFORMATION;
+    msg->msgid = MAVLINK_MSG_ID_STORAGE_INFORMATION;
     return mavlink_finalize_message_chan(msg, system_id, component_id, chan, MAVLINK_MSG_ID_STORAGE_INFORMATION_MIN_LEN, MAVLINK_MSG_ID_STORAGE_INFORMATION_LEN, MAVLINK_MSG_ID_STORAGE_INFORMATION_CRC);
 }
 
@@ -165,7 +165,7 @@ static inline uint16_t mavlink_msg_storage_information_pack_chan(uint8_t system_
  */
 static inline uint16_t mavlink_msg_storage_information_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_storage_information_t* storage_information)
 {
-	return mavlink_msg_storage_information_pack(system_id, component_id, msg, storage_information->time_boot_ms, storage_information->storage_id, storage_information->status, storage_information->total_capacity, storage_information->used_capacity, storage_information->available_capacity, storage_information->read_speed, storage_information->write_speed);
+    return mavlink_msg_storage_information_pack(system_id, component_id, msg, storage_information->time_boot_ms, storage_information->storage_id, storage_information->status, storage_information->total_capacity, storage_information->used_capacity, storage_information->available_capacity, storage_information->read_speed, storage_information->write_speed);
 }
 
 /**
@@ -179,7 +179,7 @@ static inline uint16_t mavlink_msg_storage_information_encode(uint8_t system_id,
  */
 static inline uint16_t mavlink_msg_storage_information_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_storage_information_t* storage_information)
 {
-	return mavlink_msg_storage_information_pack_chan(system_id, component_id, chan, msg, storage_information->time_boot_ms, storage_information->storage_id, storage_information->status, storage_information->total_capacity, storage_information->used_capacity, storage_information->available_capacity, storage_information->read_speed, storage_information->write_speed);
+    return mavlink_msg_storage_information_pack_chan(system_id, component_id, chan, msg, storage_information->time_boot_ms, storage_information->storage_id, storage_information->status, storage_information->total_capacity, storage_information->used_capacity, storage_information->available_capacity, storage_information->read_speed, storage_information->write_speed);
 }
 
 /**
@@ -200,27 +200,27 @@ static inline uint16_t mavlink_msg_storage_information_encode_chan(uint8_t syste
 static inline void mavlink_msg_storage_information_send(mavlink_channel_t chan, uint32_t time_boot_ms, uint8_t storage_id, uint8_t status, float total_capacity, float used_capacity, float available_capacity, float read_speed, float write_speed)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-	char buf[MAVLINK_MSG_ID_STORAGE_INFORMATION_LEN];
-	_mav_put_uint32_t(buf, 0, time_boot_ms);
-	_mav_put_float(buf, 4, total_capacity);
-	_mav_put_float(buf, 8, used_capacity);
-	_mav_put_float(buf, 12, available_capacity);
-	_mav_put_float(buf, 16, read_speed);
-	_mav_put_float(buf, 20, write_speed);
-	_mav_put_uint8_t(buf, 24, storage_id);
-	_mav_put_uint8_t(buf, 25, status);
+    char buf[MAVLINK_MSG_ID_STORAGE_INFORMATION_LEN];
+    _mav_put_uint32_t(buf, 0, time_boot_ms);
+    _mav_put_float(buf, 4, total_capacity);
+    _mav_put_float(buf, 8, used_capacity);
+    _mav_put_float(buf, 12, available_capacity);
+    _mav_put_float(buf, 16, read_speed);
+    _mav_put_float(buf, 20, write_speed);
+    _mav_put_uint8_t(buf, 24, storage_id);
+    _mav_put_uint8_t(buf, 25, status);
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_STORAGE_INFORMATION, buf, MAVLINK_MSG_ID_STORAGE_INFORMATION_MIN_LEN, MAVLINK_MSG_ID_STORAGE_INFORMATION_LEN, MAVLINK_MSG_ID_STORAGE_INFORMATION_CRC);
 #else
-	mavlink_storage_information_t packet;
-	packet.time_boot_ms = time_boot_ms;
-	packet.total_capacity = total_capacity;
-	packet.used_capacity = used_capacity;
-	packet.available_capacity = available_capacity;
-	packet.read_speed = read_speed;
-	packet.write_speed = write_speed;
-	packet.storage_id = storage_id;
-	packet.status = status;
+    mavlink_storage_information_t packet;
+    packet.time_boot_ms = time_boot_ms;
+    packet.total_capacity = total_capacity;
+    packet.used_capacity = used_capacity;
+    packet.available_capacity = available_capacity;
+    packet.read_speed = read_speed;
+    packet.write_speed = write_speed;
+    packet.storage_id = storage_id;
+    packet.status = status;
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_STORAGE_INFORMATION, (const char *)&packet, MAVLINK_MSG_ID_STORAGE_INFORMATION_MIN_LEN, MAVLINK_MSG_ID_STORAGE_INFORMATION_LEN, MAVLINK_MSG_ID_STORAGE_INFORMATION_CRC);
 #endif
@@ -251,27 +251,27 @@ static inline void mavlink_msg_storage_information_send_struct(mavlink_channel_t
 static inline void mavlink_msg_storage_information_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  uint32_t time_boot_ms, uint8_t storage_id, uint8_t status, float total_capacity, float used_capacity, float available_capacity, float read_speed, float write_speed)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-	char *buf = (char *)msgbuf;
-	_mav_put_uint32_t(buf, 0, time_boot_ms);
-	_mav_put_float(buf, 4, total_capacity);
-	_mav_put_float(buf, 8, used_capacity);
-	_mav_put_float(buf, 12, available_capacity);
-	_mav_put_float(buf, 16, read_speed);
-	_mav_put_float(buf, 20, write_speed);
-	_mav_put_uint8_t(buf, 24, storage_id);
-	_mav_put_uint8_t(buf, 25, status);
+    char *buf = (char *)msgbuf;
+    _mav_put_uint32_t(buf, 0, time_boot_ms);
+    _mav_put_float(buf, 4, total_capacity);
+    _mav_put_float(buf, 8, used_capacity);
+    _mav_put_float(buf, 12, available_capacity);
+    _mav_put_float(buf, 16, read_speed);
+    _mav_put_float(buf, 20, write_speed);
+    _mav_put_uint8_t(buf, 24, storage_id);
+    _mav_put_uint8_t(buf, 25, status);
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_STORAGE_INFORMATION, buf, MAVLINK_MSG_ID_STORAGE_INFORMATION_MIN_LEN, MAVLINK_MSG_ID_STORAGE_INFORMATION_LEN, MAVLINK_MSG_ID_STORAGE_INFORMATION_CRC);
 #else
-	mavlink_storage_information_t *packet = (mavlink_storage_information_t *)msgbuf;
-	packet->time_boot_ms = time_boot_ms;
-	packet->total_capacity = total_capacity;
-	packet->used_capacity = used_capacity;
-	packet->available_capacity = available_capacity;
-	packet->read_speed = read_speed;
-	packet->write_speed = write_speed;
-	packet->storage_id = storage_id;
-	packet->status = status;
+    mavlink_storage_information_t *packet = (mavlink_storage_information_t *)msgbuf;
+    packet->time_boot_ms = time_boot_ms;
+    packet->total_capacity = total_capacity;
+    packet->used_capacity = used_capacity;
+    packet->available_capacity = available_capacity;
+    packet->read_speed = read_speed;
+    packet->write_speed = write_speed;
+    packet->storage_id = storage_id;
+    packet->status = status;
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_STORAGE_INFORMATION, (const char *)packet, MAVLINK_MSG_ID_STORAGE_INFORMATION_MIN_LEN, MAVLINK_MSG_ID_STORAGE_INFORMATION_LEN, MAVLINK_MSG_ID_STORAGE_INFORMATION_CRC);
 #endif
@@ -290,7 +290,7 @@ static inline void mavlink_msg_storage_information_send_buf(mavlink_message_t *m
  */
 static inline uint32_t mavlink_msg_storage_information_get_time_boot_ms(const mavlink_message_t* msg)
 {
-	return _MAV_RETURN_uint32_t(msg,  0);
+    return _MAV_RETURN_uint32_t(msg,  0);
 }
 
 /**
@@ -300,7 +300,7 @@ static inline uint32_t mavlink_msg_storage_information_get_time_boot_ms(const ma
  */
 static inline uint8_t mavlink_msg_storage_information_get_storage_id(const mavlink_message_t* msg)
 {
-	return _MAV_RETURN_uint8_t(msg,  24);
+    return _MAV_RETURN_uint8_t(msg,  24);
 }
 
 /**
@@ -310,7 +310,7 @@ static inline uint8_t mavlink_msg_storage_information_get_storage_id(const mavli
  */
 static inline uint8_t mavlink_msg_storage_information_get_status(const mavlink_message_t* msg)
 {
-	return _MAV_RETURN_uint8_t(msg,  25);
+    return _MAV_RETURN_uint8_t(msg,  25);
 }
 
 /**
@@ -320,7 +320,7 @@ static inline uint8_t mavlink_msg_storage_information_get_status(const mavlink_m
  */
 static inline float mavlink_msg_storage_information_get_total_capacity(const mavlink_message_t* msg)
 {
-	return _MAV_RETURN_float(msg,  4);
+    return _MAV_RETURN_float(msg,  4);
 }
 
 /**
@@ -330,7 +330,7 @@ static inline float mavlink_msg_storage_information_get_total_capacity(const mav
  */
 static inline float mavlink_msg_storage_information_get_used_capacity(const mavlink_message_t* msg)
 {
-	return _MAV_RETURN_float(msg,  8);
+    return _MAV_RETURN_float(msg,  8);
 }
 
 /**
@@ -340,7 +340,7 @@ static inline float mavlink_msg_storage_information_get_used_capacity(const mavl
  */
 static inline float mavlink_msg_storage_information_get_available_capacity(const mavlink_message_t* msg)
 {
-	return _MAV_RETURN_float(msg,  12);
+    return _MAV_RETURN_float(msg,  12);
 }
 
 /**
@@ -350,7 +350,7 @@ static inline float mavlink_msg_storage_information_get_available_capacity(const
  */
 static inline float mavlink_msg_storage_information_get_read_speed(const mavlink_message_t* msg)
 {
-	return _MAV_RETURN_float(msg,  16);
+    return _MAV_RETURN_float(msg,  16);
 }
 
 /**
@@ -360,7 +360,7 @@ static inline float mavlink_msg_storage_information_get_read_speed(const mavlink
  */
 static inline float mavlink_msg_storage_information_get_write_speed(const mavlink_message_t* msg)
 {
-	return _MAV_RETURN_float(msg,  20);
+    return _MAV_RETURN_float(msg,  20);
 }
 
 /**
@@ -372,17 +372,17 @@ static inline float mavlink_msg_storage_information_get_write_speed(const mavlin
 static inline void mavlink_msg_storage_information_decode(const mavlink_message_t* msg, mavlink_storage_information_t* storage_information)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-	storage_information->time_boot_ms = mavlink_msg_storage_information_get_time_boot_ms(msg);
-	storage_information->total_capacity = mavlink_msg_storage_information_get_total_capacity(msg);
-	storage_information->used_capacity = mavlink_msg_storage_information_get_used_capacity(msg);
-	storage_information->available_capacity = mavlink_msg_storage_information_get_available_capacity(msg);
-	storage_information->read_speed = mavlink_msg_storage_information_get_read_speed(msg);
-	storage_information->write_speed = mavlink_msg_storage_information_get_write_speed(msg);
-	storage_information->storage_id = mavlink_msg_storage_information_get_storage_id(msg);
-	storage_information->status = mavlink_msg_storage_information_get_status(msg);
+    storage_information->time_boot_ms = mavlink_msg_storage_information_get_time_boot_ms(msg);
+    storage_information->total_capacity = mavlink_msg_storage_information_get_total_capacity(msg);
+    storage_information->used_capacity = mavlink_msg_storage_information_get_used_capacity(msg);
+    storage_information->available_capacity = mavlink_msg_storage_information_get_available_capacity(msg);
+    storage_information->read_speed = mavlink_msg_storage_information_get_read_speed(msg);
+    storage_information->write_speed = mavlink_msg_storage_information_get_write_speed(msg);
+    storage_information->storage_id = mavlink_msg_storage_information_get_storage_id(msg);
+    storage_information->status = mavlink_msg_storage_information_get_status(msg);
 #else
         uint8_t len = msg->len < MAVLINK_MSG_ID_STORAGE_INFORMATION_LEN? msg->len : MAVLINK_MSG_ID_STORAGE_INFORMATION_LEN;
         memset(storage_information, 0, MAVLINK_MSG_ID_STORAGE_INFORMATION_LEN);
-	memcpy(storage_information, _MAV_PAYLOAD(msg), len);
+    memcpy(storage_information, _MAV_PAYLOAD(msg), len);
 #endif
 }
