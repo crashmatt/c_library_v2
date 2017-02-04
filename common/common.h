@@ -973,7 +973,10 @@ typedef enum MIXER_DATA_TYPE
    MIXER_DATA_TYPE_SUBMIXER_COUNT=1, /* Submixer count at a given group and mixer | */
    MIXER_DATA_TYPE_MIXTYPE=2, /* Mixer type at a given group, index and subindex | */
    MIXER_DATA_TYPE_PARAMETER=3, /* Parameter at a given group, index and subindex | */
-   MIXER_DATA_TYPE_ENUM_END=4, /*  | */
+   MIXER_ACTION_SEND_MISSING=50, /* Used by the groundstation only | */
+   MIXER_ACTION_SEND_ALL=100, /* Send all available mixer data and parameters from a given group | */
+   MIXER_ACTION_SAVE_GROUP=112, /* Save a given group to the filessytem.  Filename is fixed according to group | */
+   MIXER_DATA_TYPE_ENUM_END=113, /*  | */
 } MIXER_DATA_TYPE;
 #endif
 
