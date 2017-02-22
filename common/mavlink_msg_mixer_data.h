@@ -10,18 +10,20 @@ typedef struct __mavlink_mixer_data_t {
  uint8_t mixer_group; /*< Access to different sets of mixers ie. onboard, failsafe, uavcan etc..*/
  uint8_t mixer_index; /*< Index of the mixer in the group*/
  uint8_t mixer_sub_index; /*< Index of the sub mixer in the mixer*/
- uint8_t parameter_index; /*< Index of the parameter in the mixer or sub mixer*/
+ uint8_t parameter_index; /*< Index of the parameter in the mixer or sub mixer. Reused as connection_index when getting connection info*/
+ uint8_t connection_type; /*< Connection type as defined by the vehicle(input, output, register etc..)*/
+ uint8_t connection_group; /*< Connection group for a mixer connection*/
  uint8_t data_type; /*< Mixer data type*/
  uint8_t param_type; /*< Parameter type: see the MAV_PARAM_TYPE enum for supported data types.*/
 }) mavlink_mixer_data_t;
 
-#define MAVLINK_MSG_ID_MIXER_DATA_LEN 14
-#define MAVLINK_MSG_ID_MIXER_DATA_MIN_LEN 14
-#define MAVLINK_MSG_ID_235_LEN 14
-#define MAVLINK_MSG_ID_235_MIN_LEN 14
+#define MAVLINK_MSG_ID_MIXER_DATA_LEN 16
+#define MAVLINK_MSG_ID_MIXER_DATA_MIN_LEN 16
+#define MAVLINK_MSG_ID_235_LEN 16
+#define MAVLINK_MSG_ID_235_MIN_LEN 16
 
-#define MAVLINK_MSG_ID_MIXER_DATA_CRC 71
-#define MAVLINK_MSG_ID_235_CRC 71
+#define MAVLINK_MSG_ID_MIXER_DATA_CRC 49
+#define MAVLINK_MSG_ID_235_CRC 49
 
 
 
@@ -29,29 +31,33 @@ typedef struct __mavlink_mixer_data_t {
 #define MAVLINK_MESSAGE_INFO_MIXER_DATA { \
     235, \
     "MIXER_DATA", \
-    8, \
+    10, \
     {  { "data_value", NULL, MAVLINK_TYPE_INT32_T, 0, 0, offsetof(mavlink_mixer_data_t, data_value) }, \
          { "param_value", NULL, MAVLINK_TYPE_FLOAT, 0, 4, offsetof(mavlink_mixer_data_t, param_value) }, \
          { "mixer_group", NULL, MAVLINK_TYPE_UINT8_T, 0, 8, offsetof(mavlink_mixer_data_t, mixer_group) }, \
          { "mixer_index", NULL, MAVLINK_TYPE_UINT8_T, 0, 9, offsetof(mavlink_mixer_data_t, mixer_index) }, \
          { "mixer_sub_index", NULL, MAVLINK_TYPE_UINT8_T, 0, 10, offsetof(mavlink_mixer_data_t, mixer_sub_index) }, \
          { "parameter_index", NULL, MAVLINK_TYPE_UINT8_T, 0, 11, offsetof(mavlink_mixer_data_t, parameter_index) }, \
-         { "data_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 12, offsetof(mavlink_mixer_data_t, data_type) }, \
-         { "param_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 13, offsetof(mavlink_mixer_data_t, param_type) }, \
+         { "connection_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 12, offsetof(mavlink_mixer_data_t, connection_type) }, \
+         { "connection_group", NULL, MAVLINK_TYPE_UINT8_T, 0, 13, offsetof(mavlink_mixer_data_t, connection_group) }, \
+         { "data_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 14, offsetof(mavlink_mixer_data_t, data_type) }, \
+         { "param_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 15, offsetof(mavlink_mixer_data_t, param_type) }, \
          } \
 }
 #else
 #define MAVLINK_MESSAGE_INFO_MIXER_DATA { \
     "MIXER_DATA", \
-    8, \
+    10, \
     {  { "data_value", NULL, MAVLINK_TYPE_INT32_T, 0, 0, offsetof(mavlink_mixer_data_t, data_value) }, \
          { "param_value", NULL, MAVLINK_TYPE_FLOAT, 0, 4, offsetof(mavlink_mixer_data_t, param_value) }, \
          { "mixer_group", NULL, MAVLINK_TYPE_UINT8_T, 0, 8, offsetof(mavlink_mixer_data_t, mixer_group) }, \
          { "mixer_index", NULL, MAVLINK_TYPE_UINT8_T, 0, 9, offsetof(mavlink_mixer_data_t, mixer_index) }, \
          { "mixer_sub_index", NULL, MAVLINK_TYPE_UINT8_T, 0, 10, offsetof(mavlink_mixer_data_t, mixer_sub_index) }, \
          { "parameter_index", NULL, MAVLINK_TYPE_UINT8_T, 0, 11, offsetof(mavlink_mixer_data_t, parameter_index) }, \
-         { "data_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 12, offsetof(mavlink_mixer_data_t, data_type) }, \
-         { "param_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 13, offsetof(mavlink_mixer_data_t, param_type) }, \
+         { "connection_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 12, offsetof(mavlink_mixer_data_t, connection_type) }, \
+         { "connection_group", NULL, MAVLINK_TYPE_UINT8_T, 0, 13, offsetof(mavlink_mixer_data_t, connection_group) }, \
+         { "data_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 14, offsetof(mavlink_mixer_data_t, data_type) }, \
+         { "param_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 15, offsetof(mavlink_mixer_data_t, param_type) }, \
          } \
 }
 #endif
@@ -65,7 +71,9 @@ typedef struct __mavlink_mixer_data_t {
  * @param mixer_group Access to different sets of mixers ie. onboard, failsafe, uavcan etc..
  * @param mixer_index Index of the mixer in the group
  * @param mixer_sub_index Index of the sub mixer in the mixer
- * @param parameter_index Index of the parameter in the mixer or sub mixer
+ * @param parameter_index Index of the parameter in the mixer or sub mixer. Reused as connection_index when getting connection info
+ * @param connection_type Connection type as defined by the vehicle(input, output, register etc..)
+ * @param connection_group Connection group for a mixer connection
  * @param data_type Mixer data type
  * @param data_value Integer mixer data
  * @param param_value Parameter value
@@ -73,7 +81,7 @@ typedef struct __mavlink_mixer_data_t {
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_mixer_data_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
-                               uint8_t mixer_group, uint8_t mixer_index, uint8_t mixer_sub_index, uint8_t parameter_index, uint8_t data_type, int32_t data_value, float param_value, uint8_t param_type)
+                               uint8_t mixer_group, uint8_t mixer_index, uint8_t mixer_sub_index, uint8_t parameter_index, uint8_t connection_type, uint8_t connection_group, uint8_t data_type, int32_t data_value, float param_value, uint8_t param_type)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_MIXER_DATA_LEN];
@@ -83,8 +91,10 @@ static inline uint16_t mavlink_msg_mixer_data_pack(uint8_t system_id, uint8_t co
     _mav_put_uint8_t(buf, 9, mixer_index);
     _mav_put_uint8_t(buf, 10, mixer_sub_index);
     _mav_put_uint8_t(buf, 11, parameter_index);
-    _mav_put_uint8_t(buf, 12, data_type);
-    _mav_put_uint8_t(buf, 13, param_type);
+    _mav_put_uint8_t(buf, 12, connection_type);
+    _mav_put_uint8_t(buf, 13, connection_group);
+    _mav_put_uint8_t(buf, 14, data_type);
+    _mav_put_uint8_t(buf, 15, param_type);
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_MIXER_DATA_LEN);
 #else
@@ -95,6 +105,8 @@ static inline uint16_t mavlink_msg_mixer_data_pack(uint8_t system_id, uint8_t co
     packet.mixer_index = mixer_index;
     packet.mixer_sub_index = mixer_sub_index;
     packet.parameter_index = parameter_index;
+    packet.connection_type = connection_type;
+    packet.connection_group = connection_group;
     packet.data_type = data_type;
     packet.param_type = param_type;
 
@@ -114,7 +126,9 @@ static inline uint16_t mavlink_msg_mixer_data_pack(uint8_t system_id, uint8_t co
  * @param mixer_group Access to different sets of mixers ie. onboard, failsafe, uavcan etc..
  * @param mixer_index Index of the mixer in the group
  * @param mixer_sub_index Index of the sub mixer in the mixer
- * @param parameter_index Index of the parameter in the mixer or sub mixer
+ * @param parameter_index Index of the parameter in the mixer or sub mixer. Reused as connection_index when getting connection info
+ * @param connection_type Connection type as defined by the vehicle(input, output, register etc..)
+ * @param connection_group Connection group for a mixer connection
  * @param data_type Mixer data type
  * @param data_value Integer mixer data
  * @param param_value Parameter value
@@ -123,7 +137,7 @@ static inline uint16_t mavlink_msg_mixer_data_pack(uint8_t system_id, uint8_t co
  */
 static inline uint16_t mavlink_msg_mixer_data_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
                                mavlink_message_t* msg,
-                                   uint8_t mixer_group,uint8_t mixer_index,uint8_t mixer_sub_index,uint8_t parameter_index,uint8_t data_type,int32_t data_value,float param_value,uint8_t param_type)
+                                   uint8_t mixer_group,uint8_t mixer_index,uint8_t mixer_sub_index,uint8_t parameter_index,uint8_t connection_type,uint8_t connection_group,uint8_t data_type,int32_t data_value,float param_value,uint8_t param_type)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_MIXER_DATA_LEN];
@@ -133,8 +147,10 @@ static inline uint16_t mavlink_msg_mixer_data_pack_chan(uint8_t system_id, uint8
     _mav_put_uint8_t(buf, 9, mixer_index);
     _mav_put_uint8_t(buf, 10, mixer_sub_index);
     _mav_put_uint8_t(buf, 11, parameter_index);
-    _mav_put_uint8_t(buf, 12, data_type);
-    _mav_put_uint8_t(buf, 13, param_type);
+    _mav_put_uint8_t(buf, 12, connection_type);
+    _mav_put_uint8_t(buf, 13, connection_group);
+    _mav_put_uint8_t(buf, 14, data_type);
+    _mav_put_uint8_t(buf, 15, param_type);
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_MIXER_DATA_LEN);
 #else
@@ -145,6 +161,8 @@ static inline uint16_t mavlink_msg_mixer_data_pack_chan(uint8_t system_id, uint8
     packet.mixer_index = mixer_index;
     packet.mixer_sub_index = mixer_sub_index;
     packet.parameter_index = parameter_index;
+    packet.connection_type = connection_type;
+    packet.connection_group = connection_group;
     packet.data_type = data_type;
     packet.param_type = param_type;
 
@@ -165,7 +183,7 @@ static inline uint16_t mavlink_msg_mixer_data_pack_chan(uint8_t system_id, uint8
  */
 static inline uint16_t mavlink_msg_mixer_data_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_mixer_data_t* mixer_data)
 {
-    return mavlink_msg_mixer_data_pack(system_id, component_id, msg, mixer_data->mixer_group, mixer_data->mixer_index, mixer_data->mixer_sub_index, mixer_data->parameter_index, mixer_data->data_type, mixer_data->data_value, mixer_data->param_value, mixer_data->param_type);
+    return mavlink_msg_mixer_data_pack(system_id, component_id, msg, mixer_data->mixer_group, mixer_data->mixer_index, mixer_data->mixer_sub_index, mixer_data->parameter_index, mixer_data->connection_type, mixer_data->connection_group, mixer_data->data_type, mixer_data->data_value, mixer_data->param_value, mixer_data->param_type);
 }
 
 /**
@@ -179,7 +197,7 @@ static inline uint16_t mavlink_msg_mixer_data_encode(uint8_t system_id, uint8_t 
  */
 static inline uint16_t mavlink_msg_mixer_data_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_mixer_data_t* mixer_data)
 {
-    return mavlink_msg_mixer_data_pack_chan(system_id, component_id, chan, msg, mixer_data->mixer_group, mixer_data->mixer_index, mixer_data->mixer_sub_index, mixer_data->parameter_index, mixer_data->data_type, mixer_data->data_value, mixer_data->param_value, mixer_data->param_type);
+    return mavlink_msg_mixer_data_pack_chan(system_id, component_id, chan, msg, mixer_data->mixer_group, mixer_data->mixer_index, mixer_data->mixer_sub_index, mixer_data->parameter_index, mixer_data->connection_type, mixer_data->connection_group, mixer_data->data_type, mixer_data->data_value, mixer_data->param_value, mixer_data->param_type);
 }
 
 /**
@@ -189,7 +207,9 @@ static inline uint16_t mavlink_msg_mixer_data_encode_chan(uint8_t system_id, uin
  * @param mixer_group Access to different sets of mixers ie. onboard, failsafe, uavcan etc..
  * @param mixer_index Index of the mixer in the group
  * @param mixer_sub_index Index of the sub mixer in the mixer
- * @param parameter_index Index of the parameter in the mixer or sub mixer
+ * @param parameter_index Index of the parameter in the mixer or sub mixer. Reused as connection_index when getting connection info
+ * @param connection_type Connection type as defined by the vehicle(input, output, register etc..)
+ * @param connection_group Connection group for a mixer connection
  * @param data_type Mixer data type
  * @param data_value Integer mixer data
  * @param param_value Parameter value
@@ -197,7 +217,7 @@ static inline uint16_t mavlink_msg_mixer_data_encode_chan(uint8_t system_id, uin
  */
 #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
-static inline void mavlink_msg_mixer_data_send(mavlink_channel_t chan, uint8_t mixer_group, uint8_t mixer_index, uint8_t mixer_sub_index, uint8_t parameter_index, uint8_t data_type, int32_t data_value, float param_value, uint8_t param_type)
+static inline void mavlink_msg_mixer_data_send(mavlink_channel_t chan, uint8_t mixer_group, uint8_t mixer_index, uint8_t mixer_sub_index, uint8_t parameter_index, uint8_t connection_type, uint8_t connection_group, uint8_t data_type, int32_t data_value, float param_value, uint8_t param_type)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_MIXER_DATA_LEN];
@@ -207,8 +227,10 @@ static inline void mavlink_msg_mixer_data_send(mavlink_channel_t chan, uint8_t m
     _mav_put_uint8_t(buf, 9, mixer_index);
     _mav_put_uint8_t(buf, 10, mixer_sub_index);
     _mav_put_uint8_t(buf, 11, parameter_index);
-    _mav_put_uint8_t(buf, 12, data_type);
-    _mav_put_uint8_t(buf, 13, param_type);
+    _mav_put_uint8_t(buf, 12, connection_type);
+    _mav_put_uint8_t(buf, 13, connection_group);
+    _mav_put_uint8_t(buf, 14, data_type);
+    _mav_put_uint8_t(buf, 15, param_type);
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_MIXER_DATA, buf, MAVLINK_MSG_ID_MIXER_DATA_MIN_LEN, MAVLINK_MSG_ID_MIXER_DATA_LEN, MAVLINK_MSG_ID_MIXER_DATA_CRC);
 #else
@@ -219,6 +241,8 @@ static inline void mavlink_msg_mixer_data_send(mavlink_channel_t chan, uint8_t m
     packet.mixer_index = mixer_index;
     packet.mixer_sub_index = mixer_sub_index;
     packet.parameter_index = parameter_index;
+    packet.connection_type = connection_type;
+    packet.connection_group = connection_group;
     packet.data_type = data_type;
     packet.param_type = param_type;
 
@@ -234,7 +258,7 @@ static inline void mavlink_msg_mixer_data_send(mavlink_channel_t chan, uint8_t m
 static inline void mavlink_msg_mixer_data_send_struct(mavlink_channel_t chan, const mavlink_mixer_data_t* mixer_data)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-    mavlink_msg_mixer_data_send(chan, mixer_data->mixer_group, mixer_data->mixer_index, mixer_data->mixer_sub_index, mixer_data->parameter_index, mixer_data->data_type, mixer_data->data_value, mixer_data->param_value, mixer_data->param_type);
+    mavlink_msg_mixer_data_send(chan, mixer_data->mixer_group, mixer_data->mixer_index, mixer_data->mixer_sub_index, mixer_data->parameter_index, mixer_data->connection_type, mixer_data->connection_group, mixer_data->data_type, mixer_data->data_value, mixer_data->param_value, mixer_data->param_type);
 #else
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_MIXER_DATA, (const char *)mixer_data, MAVLINK_MSG_ID_MIXER_DATA_MIN_LEN, MAVLINK_MSG_ID_MIXER_DATA_LEN, MAVLINK_MSG_ID_MIXER_DATA_CRC);
 #endif
@@ -248,7 +272,7 @@ static inline void mavlink_msg_mixer_data_send_struct(mavlink_channel_t chan, co
   is usually the receive buffer for the channel, and allows a reply to an
   incoming message with minimum stack space usage.
  */
-static inline void mavlink_msg_mixer_data_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  uint8_t mixer_group, uint8_t mixer_index, uint8_t mixer_sub_index, uint8_t parameter_index, uint8_t data_type, int32_t data_value, float param_value, uint8_t param_type)
+static inline void mavlink_msg_mixer_data_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  uint8_t mixer_group, uint8_t mixer_index, uint8_t mixer_sub_index, uint8_t parameter_index, uint8_t connection_type, uint8_t connection_group, uint8_t data_type, int32_t data_value, float param_value, uint8_t param_type)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char *buf = (char *)msgbuf;
@@ -258,8 +282,10 @@ static inline void mavlink_msg_mixer_data_send_buf(mavlink_message_t *msgbuf, ma
     _mav_put_uint8_t(buf, 9, mixer_index);
     _mav_put_uint8_t(buf, 10, mixer_sub_index);
     _mav_put_uint8_t(buf, 11, parameter_index);
-    _mav_put_uint8_t(buf, 12, data_type);
-    _mav_put_uint8_t(buf, 13, param_type);
+    _mav_put_uint8_t(buf, 12, connection_type);
+    _mav_put_uint8_t(buf, 13, connection_group);
+    _mav_put_uint8_t(buf, 14, data_type);
+    _mav_put_uint8_t(buf, 15, param_type);
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_MIXER_DATA, buf, MAVLINK_MSG_ID_MIXER_DATA_MIN_LEN, MAVLINK_MSG_ID_MIXER_DATA_LEN, MAVLINK_MSG_ID_MIXER_DATA_CRC);
 #else
@@ -270,6 +296,8 @@ static inline void mavlink_msg_mixer_data_send_buf(mavlink_message_t *msgbuf, ma
     packet->mixer_index = mixer_index;
     packet->mixer_sub_index = mixer_sub_index;
     packet->parameter_index = parameter_index;
+    packet->connection_type = connection_type;
+    packet->connection_group = connection_group;
     packet->data_type = data_type;
     packet->param_type = param_type;
 
@@ -316,11 +344,31 @@ static inline uint8_t mavlink_msg_mixer_data_get_mixer_sub_index(const mavlink_m
 /**
  * @brief Get field parameter_index from mixer_data message
  *
- * @return Index of the parameter in the mixer or sub mixer
+ * @return Index of the parameter in the mixer or sub mixer. Reused as connection_index when getting connection info
  */
 static inline uint8_t mavlink_msg_mixer_data_get_parameter_index(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_uint8_t(msg,  11);
+}
+
+/**
+ * @brief Get field connection_type from mixer_data message
+ *
+ * @return Connection type as defined by the vehicle(input, output, register etc..)
+ */
+static inline uint8_t mavlink_msg_mixer_data_get_connection_type(const mavlink_message_t* msg)
+{
+    return _MAV_RETURN_uint8_t(msg,  12);
+}
+
+/**
+ * @brief Get field connection_group from mixer_data message
+ *
+ * @return Connection group for a mixer connection
+ */
+static inline uint8_t mavlink_msg_mixer_data_get_connection_group(const mavlink_message_t* msg)
+{
+    return _MAV_RETURN_uint8_t(msg,  13);
 }
 
 /**
@@ -330,7 +378,7 @@ static inline uint8_t mavlink_msg_mixer_data_get_parameter_index(const mavlink_m
  */
 static inline uint8_t mavlink_msg_mixer_data_get_data_type(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  12);
+    return _MAV_RETURN_uint8_t(msg,  14);
 }
 
 /**
@@ -360,7 +408,7 @@ static inline float mavlink_msg_mixer_data_get_param_value(const mavlink_message
  */
 static inline uint8_t mavlink_msg_mixer_data_get_param_type(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  13);
+    return _MAV_RETURN_uint8_t(msg,  15);
 }
 
 /**
@@ -378,6 +426,8 @@ static inline void mavlink_msg_mixer_data_decode(const mavlink_message_t* msg, m
     mixer_data->mixer_index = mavlink_msg_mixer_data_get_mixer_index(msg);
     mixer_data->mixer_sub_index = mavlink_msg_mixer_data_get_mixer_sub_index(msg);
     mixer_data->parameter_index = mavlink_msg_mixer_data_get_parameter_index(msg);
+    mixer_data->connection_type = mavlink_msg_mixer_data_get_connection_type(msg);
+    mixer_data->connection_group = mavlink_msg_mixer_data_get_connection_group(msg);
     mixer_data->data_type = mavlink_msg_mixer_data_get_data_type(msg);
     mixer_data->param_type = mavlink_msg_mixer_data_get_param_type(msg);
 #else
