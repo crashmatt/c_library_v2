@@ -981,10 +981,12 @@ typedef enum MIXER_DATA_TYPE
 {
    MIXER_DATA_TYPE_MIXER_COUNT=0, /* Mixer count at a given group | */
    MIXER_DATA_TYPE_SUBMIXER_COUNT=1, /* Submixer count at a given group and mixer | */
-   MIXER_DATA_TYPE_MIXTYPE=2, /* Mixer type at a given group, index and subindex | */
-   MIXER_DATA_TYPE_PARAMETER=3, /* Parameter at a given group, index and subindex | */
-   MIXER_DATA_TYPE_CONNECTION=4, /* Parameter at a given group, index and subindex | */
-   MIXER_DATA_TYPE_ENUM_END=5, /*  | */
+   MIXER_DATA_TYPE_MIXTYPE=2, /* Mixer type at a given group, mixer and submixer | */
+   MIXER_DATA_TYPE_PARAMETER=3, /* Parameter at a given group, mixer, submixer and parameter index | */
+   MIXER_DATA_TYPE_CONNECTION=4, /* Parameter at a given group, mixer, submixer, connection type and connection index | */
+   MIXER_DATA_TYPE_PARAMETER_COUNT=5, /* Parameter count at a given group, mixer and submixer | */
+   MIXER_DATA_TYPE_CONNECTION_COUNT=6, /* Parameter at a given group, mixer, submixer and connection type | */
+   MIXER_DATA_TYPE_ENUM_END=7, /*  | */
 } MIXER_DATA_TYPE;
 #endif
 
@@ -998,22 +1000,6 @@ typedef enum MIXER_GROUP
    MIXER_GROUP_BUS=2, /* Bus connected mixers | */
    MIXER_GROUP_ENUM_END=3, /*  | */
 } MIXER_GROUP;
-#endif
-
-/** @brief Type of mixer */
-#ifndef HAVE_ENUM_MIXER_TYPE
-#define HAVE_ENUM_MIXER_TYPE
-typedef enum MIXER_TYPE
-{
-   MIXER_TYPE_NONE=0, /* Not a valid mixer | */
-   MIXER_TYPE_NULL=1, /* Null mixer - does nothing | */
-   MIXER_TYPE_SIMPLE=2, /* A compound mixer with multiple inputs as submixers | */
-   MIXER_TYPE_MULTIROTOR=3, /* A mixer for multirotors | */
-   MIXER_TYPE_HELICOPTER=4, /* A mixer for helicopters | */
-   MIXER_TYPE_SIMPLE_INPUT=5, /* Submixer of a simple mixer | */
-   MIXER_TYPE_MULTIROTOR_ROTOR=6, /* Submixer for each motor of a multirotor | */
-   MIXER_TYPE_ENUM_END=7, /*  | */
-} MIXER_TYPE;
 #endif
 
 /** @brief Type of mixer */
