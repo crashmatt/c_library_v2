@@ -982,7 +982,8 @@ typedef enum MIXER_DATA_TYPE
    MIXER_DATA_TYPE_CONNECTION=4, /* Parameter at a given group, mixer, submixer, connection type and connection index | */
    MIXER_DATA_TYPE_PARAMETER_COUNT=5, /* Parameter count at a given group, mixer and submixer | */
    MIXER_DATA_TYPE_CONNECTION_COUNT=6, /* Parameter at a given group, mixer, submixer and connection type | */
-   MIXER_DATA_TYPE_ENUM_END=7, /*  | */
+   MIXER_DATA_TYPE_GROUP_TYPE=7, /* The mixer type for a particular mixer group | */
+   MIXER_DATA_TYPE_ENUM_END=8, /*  | */
 } MIXER_DATA_TYPE;
 #endif
 
@@ -1007,6 +1008,17 @@ typedef enum MIXER_CONN_TYPE
    MIXER_CONNECTION_INPUT=1, /* Mixer connection for input | */
    MIXER_CONN_TYPE_ENUM_END=2, /*  | */
 } MIXER_CONN_TYPE;
+#endif
+
+/** @brief Type of mixer group */
+#ifndef HAVE_ENUM_MIXER_GROUP_TYPE
+#define HAVE_ENUM_MIXER_GROUP_TYPE
+typedef enum MIXER_GROUP_TYPE
+{
+   MIXER_GROUP_UNSUPPORTED=0, /* Group that does not support mavlink communication | */
+   MIXER_GROUP_PX4_STANDARD=1, /* Group supports standard PX4 mixers | */
+   MIXER_GROUP_TYPE_ENUM_END=2, /*  | */
+} MIXER_GROUP_TYPE;
 #endif
 
 // MAVLINK VERSION

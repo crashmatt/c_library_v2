@@ -2435,6 +2435,9 @@
            <entry value="6" name="MIXER_DATA_TYPE_CONNECTION_COUNT">
              <description>Parameter at a given group, mixer, submixer and connection type</description>
            </entry>
+           <entry value="7" name="MIXER_DATA_TYPE_GROUP_TYPE">
+             <description>The mixer type for a particular mixer group</description>
+           </entry>
          </enum>
          <enum name="MIXER_GROUP">
            <description>To determine where the mixers are located</description>
@@ -2455,6 +2458,15 @@
            </entry>
            <entry value="1" name="MIXER_CONNECTION_INPUT">
              <description>Mixer connection for input</description>
+           </entry>
+         </enum>
+         <enum name="MIXER_GROUP_TYPE">
+           <description>Type of mixer group</description>
+           <entry value="0" name="MIXER_GROUP_UNSUPPORTED">
+             <description>Group that does not support mavlink communication</description>
+           </entry>
+           <entry value="1" name="MIXER_GROUP_PX4_STANDARD">
+             <description>Group supports standard PX4 mixers</description>
            </entry>
          </enum>
      </enums>
