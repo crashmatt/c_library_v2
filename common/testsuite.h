@@ -7429,21 +7429,21 @@ static void mavlink_test_high_latency(uint8_t system_id, uint8_t component_id, m
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 }
 
-static void mavlink_test_mixer_parameter(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
+static void mavlink_test_mixer_param_value(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
 {
 #ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
     mavlink_status_t *status = mavlink_get_channel_status(MAVLINK_COMM_0);
-        if ((status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) && MAVLINK_MSG_ID_MIXER_PARAMETER >= 256) {
+        if ((status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) && MAVLINK_MSG_ID_MIXER_PARAM_VALUE >= 256) {
             return;
         }
 #endif
     mavlink_message_t msg;
         uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
         uint16_t i;
-    mavlink_mixer_parameter_t packet_in = {
-        { 17.0, 18.0, 19.0, 20.0, 21.0, 22.0, 23.0, 24.0 },18899,19003,19107,19211,125,192,3,70,137,"TUVWXYZABCDEFGH"
+    mavlink_mixer_param_value_t packet_in = {
+        { 17.0, 18.0, 19.0, 20.0, 21.0, 22.0 },18483,18587,18691,18795,101,168,235,46,113,180,"MNOPQRSTUVWXYZA"
     };
-    mavlink_mixer_parameter_t packet1, packet2;
+    mavlink_mixer_param_value_t packet1, packet2;
         memset(&packet1, 0, sizeof(packet1));
         packet1.count = packet_in.count;
         packet1.index = packet_in.index;
@@ -7454,29 +7454,30 @@ static void mavlink_test_mixer_parameter(uint8_t system_id, uint8_t component_id
         packet1.mixer_type = packet_in.mixer_type;
         packet1.param_type = packet_in.param_type;
         packet1.param_array_size = packet_in.param_array_size;
+        packet1.param_array_index = packet_in.param_array_index;
         
-        mav_array_memcpy(packet1.param_values, packet_in.param_values, sizeof(float)*8);
+        mav_array_memcpy(packet1.param_values, packet_in.param_values, sizeof(float)*6);
         mav_array_memcpy(packet1.param_id, packet_in.param_id, sizeof(char)*16);
         
 #ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
         if (status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) {
            // cope with extensions
-           memset(MAVLINK_MSG_ID_MIXER_PARAMETER_MIN_LEN + (char *)&packet1, 0, sizeof(packet1)-MAVLINK_MSG_ID_MIXER_PARAMETER_MIN_LEN);
+           memset(MAVLINK_MSG_ID_MIXER_PARAM_VALUE_MIN_LEN + (char *)&packet1, 0, sizeof(packet1)-MAVLINK_MSG_ID_MIXER_PARAM_VALUE_MIN_LEN);
         }
 #endif
         memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_mixer_parameter_encode(system_id, component_id, &msg, &packet1);
-    mavlink_msg_mixer_parameter_decode(&msg, &packet2);
+    mavlink_msg_mixer_param_value_encode(system_id, component_id, &msg, &packet1);
+    mavlink_msg_mixer_param_value_decode(&msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
         memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_mixer_parameter_pack(system_id, component_id, &msg , packet1.count , packet1.index , packet1.mixer_group , packet1.mixer_index , packet1.mixer_sub_index , packet1.mixer_type , packet1.parameter_index , packet1.param_type , packet1.param_array_size , packet1.param_id , packet1.param_values );
-    mavlink_msg_mixer_parameter_decode(&msg, &packet2);
+    mavlink_msg_mixer_param_value_pack(system_id, component_id, &msg , packet1.count , packet1.index , packet1.mixer_group , packet1.mixer_index , packet1.mixer_sub_index , packet1.mixer_type , packet1.parameter_index , packet1.param_type , packet1.param_array_size , packet1.param_array_index , packet1.param_id , packet1.param_values );
+    mavlink_msg_mixer_param_value_decode(&msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
         memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_mixer_parameter_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.count , packet1.index , packet1.mixer_group , packet1.mixer_index , packet1.mixer_sub_index , packet1.mixer_type , packet1.parameter_index , packet1.param_type , packet1.param_array_size , packet1.param_id , packet1.param_values );
-    mavlink_msg_mixer_parameter_decode(&msg, &packet2);
+    mavlink_msg_mixer_param_value_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.count , packet1.index , packet1.mixer_group , packet1.mixer_index , packet1.mixer_sub_index , packet1.mixer_type , packet1.parameter_index , packet1.param_type , packet1.param_array_size , packet1.param_array_index , packet1.param_id , packet1.param_values );
+    mavlink_msg_mixer_param_value_decode(&msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
         memset(&packet2, 0, sizeof(packet2));
@@ -7484,12 +7485,141 @@ static void mavlink_test_mixer_parameter(uint8_t system_id, uint8_t component_id
         for (i=0; i<mavlink_msg_get_send_buffer_length(&msg); i++) {
             comm_send_ch(MAVLINK_COMM_0, buffer[i]);
         }
-    mavlink_msg_mixer_parameter_decode(last_msg, &packet2);
+    mavlink_msg_mixer_param_value_decode(last_msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
         
         memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_mixer_parameter_send(MAVLINK_COMM_1 , packet1.count , packet1.index , packet1.mixer_group , packet1.mixer_index , packet1.mixer_sub_index , packet1.mixer_type , packet1.parameter_index , packet1.param_type , packet1.param_array_size , packet1.param_id , packet1.param_values );
-    mavlink_msg_mixer_parameter_decode(last_msg, &packet2);
+    mavlink_msg_mixer_param_value_send(MAVLINK_COMM_1 , packet1.count , packet1.index , packet1.mixer_group , packet1.mixer_index , packet1.mixer_sub_index , packet1.mixer_type , packet1.parameter_index , packet1.param_type , packet1.param_array_size , packet1.param_array_index , packet1.param_id , packet1.param_values );
+    mavlink_msg_mixer_param_value_decode(last_msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+}
+
+static void mavlink_test_mixer_param_set(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
+{
+#ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
+    mavlink_status_t *status = mavlink_get_channel_status(MAVLINK_COMM_0);
+        if ((status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) && MAVLINK_MSG_ID_MIXER_PARAM_SET >= 256) {
+            return;
+        }
+#endif
+    mavlink_message_t msg;
+        uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
+        uint16_t i;
+    mavlink_mixer_param_set_t packet_in = {
+        { 17.0, 18.0, 19.0, 20.0, 21.0, 22.0 },18483,18587,18691,223,34,101,168,235,46,113,180,"MNOPQRSTUVWXYZA"
+    };
+    mavlink_mixer_param_set_t packet1, packet2;
+        memset(&packet1, 0, sizeof(packet1));
+        packet1.index = packet_in.index;
+        packet1.mixer_index = packet_in.mixer_index;
+        packet1.parameter_index = packet_in.parameter_index;
+        packet1.target_system = packet_in.target_system;
+        packet1.target_component = packet_in.target_component;
+        packet1.mixer_group = packet_in.mixer_group;
+        packet1.mixer_sub_index = packet_in.mixer_sub_index;
+        packet1.mixer_type = packet_in.mixer_type;
+        packet1.param_type = packet_in.param_type;
+        packet1.param_array_write_count = packet_in.param_array_write_count;
+        packet1.param_array_index = packet_in.param_array_index;
+        
+        mav_array_memcpy(packet1.param_values, packet_in.param_values, sizeof(float)*6);
+        mav_array_memcpy(packet1.param_id, packet_in.param_id, sizeof(char)*16);
+        
+#ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
+        if (status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) {
+           // cope with extensions
+           memset(MAVLINK_MSG_ID_MIXER_PARAM_SET_MIN_LEN + (char *)&packet1, 0, sizeof(packet1)-MAVLINK_MSG_ID_MIXER_PARAM_SET_MIN_LEN);
+        }
+#endif
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_mixer_param_set_encode(system_id, component_id, &msg, &packet1);
+    mavlink_msg_mixer_param_set_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_mixer_param_set_pack(system_id, component_id, &msg , packet1.target_system , packet1.target_component , packet1.index , packet1.mixer_group , packet1.mixer_index , packet1.mixer_sub_index , packet1.mixer_type , packet1.parameter_index , packet1.param_type , packet1.param_array_write_count , packet1.param_array_index , packet1.param_id , packet1.param_values );
+    mavlink_msg_mixer_param_set_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_mixer_param_set_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.target_system , packet1.target_component , packet1.index , packet1.mixer_group , packet1.mixer_index , packet1.mixer_sub_index , packet1.mixer_type , packet1.parameter_index , packet1.param_type , packet1.param_array_write_count , packet1.param_array_index , packet1.param_id , packet1.param_values );
+    mavlink_msg_mixer_param_set_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+        mavlink_msg_to_send_buffer(buffer, &msg);
+        for (i=0; i<mavlink_msg_get_send_buffer_length(&msg); i++) {
+            comm_send_ch(MAVLINK_COMM_0, buffer[i]);
+        }
+    mavlink_msg_mixer_param_set_decode(last_msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+        
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_mixer_param_set_send(MAVLINK_COMM_1 , packet1.target_system , packet1.target_component , packet1.index , packet1.mixer_group , packet1.mixer_index , packet1.mixer_sub_index , packet1.mixer_type , packet1.parameter_index , packet1.param_type , packet1.param_array_write_count , packet1.param_array_index , packet1.param_id , packet1.param_values );
+    mavlink_msg_mixer_param_set_decode(last_msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+}
+
+static void mavlink_test_mixer_param_request_read(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
+{
+#ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
+    mavlink_status_t *status = mavlink_get_channel_status(MAVLINK_COMM_0);
+        if ((status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) && MAVLINK_MSG_ID_MIXER_PARAM_REQUEST_READ >= 256) {
+            return;
+        }
+#endif
+    mavlink_message_t msg;
+        uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
+        uint16_t i;
+    mavlink_mixer_param_request_read_t packet_in = {
+        17235,17339,17443,151,218,29,96,163,230,"MNOPQRSTUVWXYZA"
+    };
+    mavlink_mixer_param_request_read_t packet1, packet2;
+        memset(&packet1, 0, sizeof(packet1));
+        packet1.index = packet_in.index;
+        packet1.mixer_index = packet_in.mixer_index;
+        packet1.parameter_index = packet_in.parameter_index;
+        packet1.target_system = packet_in.target_system;
+        packet1.target_component = packet_in.target_component;
+        packet1.mixer_group = packet_in.mixer_group;
+        packet1.mixer_sub_index = packet_in.mixer_sub_index;
+        packet1.param_type = packet_in.param_type;
+        packet1.param_array_index = packet_in.param_array_index;
+        
+        mav_array_memcpy(packet1.param_id, packet_in.param_id, sizeof(char)*16);
+        
+#ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
+        if (status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) {
+           // cope with extensions
+           memset(MAVLINK_MSG_ID_MIXER_PARAM_REQUEST_READ_MIN_LEN + (char *)&packet1, 0, sizeof(packet1)-MAVLINK_MSG_ID_MIXER_PARAM_REQUEST_READ_MIN_LEN);
+        }
+#endif
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_mixer_param_request_read_encode(system_id, component_id, &msg, &packet1);
+    mavlink_msg_mixer_param_request_read_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_mixer_param_request_read_pack(system_id, component_id, &msg , packet1.target_system , packet1.target_component , packet1.index , packet1.mixer_group , packet1.mixer_index , packet1.mixer_sub_index , packet1.parameter_index , packet1.param_type , packet1.param_array_index , packet1.param_id );
+    mavlink_msg_mixer_param_request_read_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_mixer_param_request_read_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.target_system , packet1.target_component , packet1.index , packet1.mixer_group , packet1.mixer_index , packet1.mixer_sub_index , packet1.parameter_index , packet1.param_type , packet1.param_array_index , packet1.param_id );
+    mavlink_msg_mixer_param_request_read_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+        mavlink_msg_to_send_buffer(buffer, &msg);
+        for (i=0; i<mavlink_msg_get_send_buffer_length(&msg); i++) {
+            comm_send_ch(MAVLINK_COMM_0, buffer[i]);
+        }
+    mavlink_msg_mixer_param_request_read_decode(last_msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+        
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_mixer_param_request_read_send(MAVLINK_COMM_1 , packet1.target_system , packet1.target_component , packet1.index , packet1.mixer_group , packet1.mixer_index , packet1.mixer_sub_index , packet1.parameter_index , packet1.param_type , packet1.param_array_index , packet1.param_id );
+    mavlink_msg_mixer_param_request_read_decode(last_msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 }
 
@@ -9208,7 +9338,9 @@ static void mavlink_test_common(uint8_t system_id, uint8_t component_id, mavlink
     mavlink_test_gps_input(system_id, component_id, last_msg);
     mavlink_test_gps_rtcm_data(system_id, component_id, last_msg);
     mavlink_test_high_latency(system_id, component_id, last_msg);
-    mavlink_test_mixer_parameter(system_id, component_id, last_msg);
+    mavlink_test_mixer_param_value(system_id, component_id, last_msg);
+    mavlink_test_mixer_param_set(system_id, component_id, last_msg);
+    mavlink_test_mixer_param_request_read(system_id, component_id, last_msg);
     mavlink_test_vibration(system_id, component_id, last_msg);
     mavlink_test_home_position(system_id, component_id, last_msg);
     mavlink_test_set_home_position(system_id, component_id, last_msg);
