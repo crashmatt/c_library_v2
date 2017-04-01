@@ -15,18 +15,16 @@ typedef struct __mavlink_mixer_param_set_t {
  uint8_t mixer_sub_index; /*< Index of the sub mixer in the mixer*/
  uint8_t mixer_type; /*< Implementation specific identifier for mixer type*/
  uint8_t param_type; /*< Parameter type: see the MAV_PARAM_TYPE enum for supported data types.*/
- uint8_t param_array_write_count; /*< Count of array values to write*/
- uint8_t param_array_index; /*< Array index*/
  char param_id[16]; /*< Onboard parameter id, terminated by NULL if the length is less than 16 human-readable chars and WITHOUT null termination (NULL) byte if the length is exactly 16 chars - applications have to provide 16+1 bytes storage if the ID is stored as string*/
 }) mavlink_mixer_param_set_t;
 
-#define MAVLINK_MSG_ID_MIXER_PARAM_SET_LEN 54
-#define MAVLINK_MSG_ID_MIXER_PARAM_SET_MIN_LEN 54
-#define MAVLINK_MSG_ID_236_LEN 54
-#define MAVLINK_MSG_ID_236_MIN_LEN 54
+#define MAVLINK_MSG_ID_MIXER_PARAM_SET_LEN 52
+#define MAVLINK_MSG_ID_MIXER_PARAM_SET_MIN_LEN 52
+#define MAVLINK_MSG_ID_236_LEN 52
+#define MAVLINK_MSG_ID_236_MIN_LEN 52
 
-#define MAVLINK_MSG_ID_MIXER_PARAM_SET_CRC 228
-#define MAVLINK_MSG_ID_236_CRC 228
+#define MAVLINK_MSG_ID_MIXER_PARAM_SET_CRC 139
+#define MAVLINK_MSG_ID_236_CRC 139
 
 #define MAVLINK_MSG_MIXER_PARAM_SET_FIELD_PARAM_VALUES_LEN 6
 #define MAVLINK_MSG_MIXER_PARAM_SET_FIELD_PARAM_ID_LEN 16
@@ -35,7 +33,7 @@ typedef struct __mavlink_mixer_param_set_t {
 #define MAVLINK_MESSAGE_INFO_MIXER_PARAM_SET { \
     236, \
     "MIXER_PARAM_SET", \
-    13, \
+    11, \
     {  { "param_values", NULL, MAVLINK_TYPE_FLOAT, 6, 0, offsetof(mavlink_mixer_param_set_t, param_values) }, \
          { "index", NULL, MAVLINK_TYPE_UINT16_T, 0, 24, offsetof(mavlink_mixer_param_set_t, index) }, \
          { "mixer_index", NULL, MAVLINK_TYPE_UINT16_T, 0, 26, offsetof(mavlink_mixer_param_set_t, mixer_index) }, \
@@ -46,15 +44,13 @@ typedef struct __mavlink_mixer_param_set_t {
          { "mixer_sub_index", NULL, MAVLINK_TYPE_UINT8_T, 0, 33, offsetof(mavlink_mixer_param_set_t, mixer_sub_index) }, \
          { "mixer_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 34, offsetof(mavlink_mixer_param_set_t, mixer_type) }, \
          { "param_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 35, offsetof(mavlink_mixer_param_set_t, param_type) }, \
-         { "param_array_write_count", NULL, MAVLINK_TYPE_UINT8_T, 0, 36, offsetof(mavlink_mixer_param_set_t, param_array_write_count) }, \
-         { "param_array_index", NULL, MAVLINK_TYPE_UINT8_T, 0, 37, offsetof(mavlink_mixer_param_set_t, param_array_index) }, \
-         { "param_id", NULL, MAVLINK_TYPE_CHAR, 16, 38, offsetof(mavlink_mixer_param_set_t, param_id) }, \
+         { "param_id", NULL, MAVLINK_TYPE_CHAR, 16, 36, offsetof(mavlink_mixer_param_set_t, param_id) }, \
          } \
 }
 #else
 #define MAVLINK_MESSAGE_INFO_MIXER_PARAM_SET { \
     "MIXER_PARAM_SET", \
-    13, \
+    11, \
     {  { "param_values", NULL, MAVLINK_TYPE_FLOAT, 6, 0, offsetof(mavlink_mixer_param_set_t, param_values) }, \
          { "index", NULL, MAVLINK_TYPE_UINT16_T, 0, 24, offsetof(mavlink_mixer_param_set_t, index) }, \
          { "mixer_index", NULL, MAVLINK_TYPE_UINT16_T, 0, 26, offsetof(mavlink_mixer_param_set_t, mixer_index) }, \
@@ -65,9 +61,7 @@ typedef struct __mavlink_mixer_param_set_t {
          { "mixer_sub_index", NULL, MAVLINK_TYPE_UINT8_T, 0, 33, offsetof(mavlink_mixer_param_set_t, mixer_sub_index) }, \
          { "mixer_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 34, offsetof(mavlink_mixer_param_set_t, mixer_type) }, \
          { "param_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 35, offsetof(mavlink_mixer_param_set_t, param_type) }, \
-         { "param_array_write_count", NULL, MAVLINK_TYPE_UINT8_T, 0, 36, offsetof(mavlink_mixer_param_set_t, param_array_write_count) }, \
-         { "param_array_index", NULL, MAVLINK_TYPE_UINT8_T, 0, 37, offsetof(mavlink_mixer_param_set_t, param_array_index) }, \
-         { "param_id", NULL, MAVLINK_TYPE_CHAR, 16, 38, offsetof(mavlink_mixer_param_set_t, param_id) }, \
+         { "param_id", NULL, MAVLINK_TYPE_CHAR, 16, 36, offsetof(mavlink_mixer_param_set_t, param_id) }, \
          } \
 }
 #endif
@@ -87,14 +81,12 @@ typedef struct __mavlink_mixer_param_set_t {
  * @param mixer_type Implementation specific identifier for mixer type
  * @param parameter_index Index of the parameter in a mixer or something else
  * @param param_type Parameter type: see the MAV_PARAM_TYPE enum for supported data types.
- * @param param_array_write_count Count of array values to write
- * @param param_array_index Array index
  * @param param_id Onboard parameter id, terminated by NULL if the length is less than 16 human-readable chars and WITHOUT null termination (NULL) byte if the length is exactly 16 chars - applications have to provide 16+1 bytes storage if the ID is stored as string
  * @param param_values Array of parameter values
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_mixer_param_set_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
-                               uint8_t target_system, uint8_t target_component, uint16_t index, uint8_t mixer_group, uint16_t mixer_index, uint8_t mixer_sub_index, uint8_t mixer_type, uint16_t parameter_index, uint8_t param_type, uint8_t param_array_write_count, uint8_t param_array_index, const char *param_id, const float *param_values)
+                               uint8_t target_system, uint8_t target_component, uint16_t index, uint8_t mixer_group, uint16_t mixer_index, uint8_t mixer_sub_index, uint8_t mixer_type, uint16_t parameter_index, uint8_t param_type, const char *param_id, const float *param_values)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_MIXER_PARAM_SET_LEN];
@@ -107,10 +99,8 @@ static inline uint16_t mavlink_msg_mixer_param_set_pack(uint8_t system_id, uint8
     _mav_put_uint8_t(buf, 33, mixer_sub_index);
     _mav_put_uint8_t(buf, 34, mixer_type);
     _mav_put_uint8_t(buf, 35, param_type);
-    _mav_put_uint8_t(buf, 36, param_array_write_count);
-    _mav_put_uint8_t(buf, 37, param_array_index);
     _mav_put_float_array(buf, 0, param_values, 6);
-    _mav_put_char_array(buf, 38, param_id, 16);
+    _mav_put_char_array(buf, 36, param_id, 16);
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_MIXER_PARAM_SET_LEN);
 #else
     mavlink_mixer_param_set_t packet;
@@ -123,8 +113,6 @@ static inline uint16_t mavlink_msg_mixer_param_set_pack(uint8_t system_id, uint8
     packet.mixer_sub_index = mixer_sub_index;
     packet.mixer_type = mixer_type;
     packet.param_type = param_type;
-    packet.param_array_write_count = param_array_write_count;
-    packet.param_array_index = param_array_index;
     mav_array_memcpy(packet.param_values, param_values, sizeof(float)*6);
     mav_array_memcpy(packet.param_id, param_id, sizeof(char)*16);
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_MIXER_PARAM_SET_LEN);
@@ -149,15 +137,13 @@ static inline uint16_t mavlink_msg_mixer_param_set_pack(uint8_t system_id, uint8
  * @param mixer_type Implementation specific identifier for mixer type
  * @param parameter_index Index of the parameter in a mixer or something else
  * @param param_type Parameter type: see the MAV_PARAM_TYPE enum for supported data types.
- * @param param_array_write_count Count of array values to write
- * @param param_array_index Array index
  * @param param_id Onboard parameter id, terminated by NULL if the length is less than 16 human-readable chars and WITHOUT null termination (NULL) byte if the length is exactly 16 chars - applications have to provide 16+1 bytes storage if the ID is stored as string
  * @param param_values Array of parameter values
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_mixer_param_set_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
                                mavlink_message_t* msg,
-                                   uint8_t target_system,uint8_t target_component,uint16_t index,uint8_t mixer_group,uint16_t mixer_index,uint8_t mixer_sub_index,uint8_t mixer_type,uint16_t parameter_index,uint8_t param_type,uint8_t param_array_write_count,uint8_t param_array_index,const char *param_id,const float *param_values)
+                                   uint8_t target_system,uint8_t target_component,uint16_t index,uint8_t mixer_group,uint16_t mixer_index,uint8_t mixer_sub_index,uint8_t mixer_type,uint16_t parameter_index,uint8_t param_type,const char *param_id,const float *param_values)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_MIXER_PARAM_SET_LEN];
@@ -170,10 +156,8 @@ static inline uint16_t mavlink_msg_mixer_param_set_pack_chan(uint8_t system_id, 
     _mav_put_uint8_t(buf, 33, mixer_sub_index);
     _mav_put_uint8_t(buf, 34, mixer_type);
     _mav_put_uint8_t(buf, 35, param_type);
-    _mav_put_uint8_t(buf, 36, param_array_write_count);
-    _mav_put_uint8_t(buf, 37, param_array_index);
     _mav_put_float_array(buf, 0, param_values, 6);
-    _mav_put_char_array(buf, 38, param_id, 16);
+    _mav_put_char_array(buf, 36, param_id, 16);
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_MIXER_PARAM_SET_LEN);
 #else
     mavlink_mixer_param_set_t packet;
@@ -186,8 +170,6 @@ static inline uint16_t mavlink_msg_mixer_param_set_pack_chan(uint8_t system_id, 
     packet.mixer_sub_index = mixer_sub_index;
     packet.mixer_type = mixer_type;
     packet.param_type = param_type;
-    packet.param_array_write_count = param_array_write_count;
-    packet.param_array_index = param_array_index;
     mav_array_memcpy(packet.param_values, param_values, sizeof(float)*6);
     mav_array_memcpy(packet.param_id, param_id, sizeof(char)*16);
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_MIXER_PARAM_SET_LEN);
@@ -207,7 +189,7 @@ static inline uint16_t mavlink_msg_mixer_param_set_pack_chan(uint8_t system_id, 
  */
 static inline uint16_t mavlink_msg_mixer_param_set_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_mixer_param_set_t* mixer_param_set)
 {
-    return mavlink_msg_mixer_param_set_pack(system_id, component_id, msg, mixer_param_set->target_system, mixer_param_set->target_component, mixer_param_set->index, mixer_param_set->mixer_group, mixer_param_set->mixer_index, mixer_param_set->mixer_sub_index, mixer_param_set->mixer_type, mixer_param_set->parameter_index, mixer_param_set->param_type, mixer_param_set->param_array_write_count, mixer_param_set->param_array_index, mixer_param_set->param_id, mixer_param_set->param_values);
+    return mavlink_msg_mixer_param_set_pack(system_id, component_id, msg, mixer_param_set->target_system, mixer_param_set->target_component, mixer_param_set->index, mixer_param_set->mixer_group, mixer_param_set->mixer_index, mixer_param_set->mixer_sub_index, mixer_param_set->mixer_type, mixer_param_set->parameter_index, mixer_param_set->param_type, mixer_param_set->param_id, mixer_param_set->param_values);
 }
 
 /**
@@ -221,7 +203,7 @@ static inline uint16_t mavlink_msg_mixer_param_set_encode(uint8_t system_id, uin
  */
 static inline uint16_t mavlink_msg_mixer_param_set_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_mixer_param_set_t* mixer_param_set)
 {
-    return mavlink_msg_mixer_param_set_pack_chan(system_id, component_id, chan, msg, mixer_param_set->target_system, mixer_param_set->target_component, mixer_param_set->index, mixer_param_set->mixer_group, mixer_param_set->mixer_index, mixer_param_set->mixer_sub_index, mixer_param_set->mixer_type, mixer_param_set->parameter_index, mixer_param_set->param_type, mixer_param_set->param_array_write_count, mixer_param_set->param_array_index, mixer_param_set->param_id, mixer_param_set->param_values);
+    return mavlink_msg_mixer_param_set_pack_chan(system_id, component_id, chan, msg, mixer_param_set->target_system, mixer_param_set->target_component, mixer_param_set->index, mixer_param_set->mixer_group, mixer_param_set->mixer_index, mixer_param_set->mixer_sub_index, mixer_param_set->mixer_type, mixer_param_set->parameter_index, mixer_param_set->param_type, mixer_param_set->param_id, mixer_param_set->param_values);
 }
 
 /**
@@ -237,14 +219,12 @@ static inline uint16_t mavlink_msg_mixer_param_set_encode_chan(uint8_t system_id
  * @param mixer_type Implementation specific identifier for mixer type
  * @param parameter_index Index of the parameter in a mixer or something else
  * @param param_type Parameter type: see the MAV_PARAM_TYPE enum for supported data types.
- * @param param_array_write_count Count of array values to write
- * @param param_array_index Array index
  * @param param_id Onboard parameter id, terminated by NULL if the length is less than 16 human-readable chars and WITHOUT null termination (NULL) byte if the length is exactly 16 chars - applications have to provide 16+1 bytes storage if the ID is stored as string
  * @param param_values Array of parameter values
  */
 #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
-static inline void mavlink_msg_mixer_param_set_send(mavlink_channel_t chan, uint8_t target_system, uint8_t target_component, uint16_t index, uint8_t mixer_group, uint16_t mixer_index, uint8_t mixer_sub_index, uint8_t mixer_type, uint16_t parameter_index, uint8_t param_type, uint8_t param_array_write_count, uint8_t param_array_index, const char *param_id, const float *param_values)
+static inline void mavlink_msg_mixer_param_set_send(mavlink_channel_t chan, uint8_t target_system, uint8_t target_component, uint16_t index, uint8_t mixer_group, uint16_t mixer_index, uint8_t mixer_sub_index, uint8_t mixer_type, uint16_t parameter_index, uint8_t param_type, const char *param_id, const float *param_values)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_MIXER_PARAM_SET_LEN];
@@ -257,10 +237,8 @@ static inline void mavlink_msg_mixer_param_set_send(mavlink_channel_t chan, uint
     _mav_put_uint8_t(buf, 33, mixer_sub_index);
     _mav_put_uint8_t(buf, 34, mixer_type);
     _mav_put_uint8_t(buf, 35, param_type);
-    _mav_put_uint8_t(buf, 36, param_array_write_count);
-    _mav_put_uint8_t(buf, 37, param_array_index);
     _mav_put_float_array(buf, 0, param_values, 6);
-    _mav_put_char_array(buf, 38, param_id, 16);
+    _mav_put_char_array(buf, 36, param_id, 16);
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_MIXER_PARAM_SET, buf, MAVLINK_MSG_ID_MIXER_PARAM_SET_MIN_LEN, MAVLINK_MSG_ID_MIXER_PARAM_SET_LEN, MAVLINK_MSG_ID_MIXER_PARAM_SET_CRC);
 #else
     mavlink_mixer_param_set_t packet;
@@ -273,8 +251,6 @@ static inline void mavlink_msg_mixer_param_set_send(mavlink_channel_t chan, uint
     packet.mixer_sub_index = mixer_sub_index;
     packet.mixer_type = mixer_type;
     packet.param_type = param_type;
-    packet.param_array_write_count = param_array_write_count;
-    packet.param_array_index = param_array_index;
     mav_array_memcpy(packet.param_values, param_values, sizeof(float)*6);
     mav_array_memcpy(packet.param_id, param_id, sizeof(char)*16);
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_MIXER_PARAM_SET, (const char *)&packet, MAVLINK_MSG_ID_MIXER_PARAM_SET_MIN_LEN, MAVLINK_MSG_ID_MIXER_PARAM_SET_LEN, MAVLINK_MSG_ID_MIXER_PARAM_SET_CRC);
@@ -289,7 +265,7 @@ static inline void mavlink_msg_mixer_param_set_send(mavlink_channel_t chan, uint
 static inline void mavlink_msg_mixer_param_set_send_struct(mavlink_channel_t chan, const mavlink_mixer_param_set_t* mixer_param_set)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-    mavlink_msg_mixer_param_set_send(chan, mixer_param_set->target_system, mixer_param_set->target_component, mixer_param_set->index, mixer_param_set->mixer_group, mixer_param_set->mixer_index, mixer_param_set->mixer_sub_index, mixer_param_set->mixer_type, mixer_param_set->parameter_index, mixer_param_set->param_type, mixer_param_set->param_array_write_count, mixer_param_set->param_array_index, mixer_param_set->param_id, mixer_param_set->param_values);
+    mavlink_msg_mixer_param_set_send(chan, mixer_param_set->target_system, mixer_param_set->target_component, mixer_param_set->index, mixer_param_set->mixer_group, mixer_param_set->mixer_index, mixer_param_set->mixer_sub_index, mixer_param_set->mixer_type, mixer_param_set->parameter_index, mixer_param_set->param_type, mixer_param_set->param_id, mixer_param_set->param_values);
 #else
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_MIXER_PARAM_SET, (const char *)mixer_param_set, MAVLINK_MSG_ID_MIXER_PARAM_SET_MIN_LEN, MAVLINK_MSG_ID_MIXER_PARAM_SET_LEN, MAVLINK_MSG_ID_MIXER_PARAM_SET_CRC);
 #endif
@@ -303,7 +279,7 @@ static inline void mavlink_msg_mixer_param_set_send_struct(mavlink_channel_t cha
   is usually the receive buffer for the channel, and allows a reply to an
   incoming message with minimum stack space usage.
  */
-static inline void mavlink_msg_mixer_param_set_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  uint8_t target_system, uint8_t target_component, uint16_t index, uint8_t mixer_group, uint16_t mixer_index, uint8_t mixer_sub_index, uint8_t mixer_type, uint16_t parameter_index, uint8_t param_type, uint8_t param_array_write_count, uint8_t param_array_index, const char *param_id, const float *param_values)
+static inline void mavlink_msg_mixer_param_set_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  uint8_t target_system, uint8_t target_component, uint16_t index, uint8_t mixer_group, uint16_t mixer_index, uint8_t mixer_sub_index, uint8_t mixer_type, uint16_t parameter_index, uint8_t param_type, const char *param_id, const float *param_values)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char *buf = (char *)msgbuf;
@@ -316,10 +292,8 @@ static inline void mavlink_msg_mixer_param_set_send_buf(mavlink_message_t *msgbu
     _mav_put_uint8_t(buf, 33, mixer_sub_index);
     _mav_put_uint8_t(buf, 34, mixer_type);
     _mav_put_uint8_t(buf, 35, param_type);
-    _mav_put_uint8_t(buf, 36, param_array_write_count);
-    _mav_put_uint8_t(buf, 37, param_array_index);
     _mav_put_float_array(buf, 0, param_values, 6);
-    _mav_put_char_array(buf, 38, param_id, 16);
+    _mav_put_char_array(buf, 36, param_id, 16);
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_MIXER_PARAM_SET, buf, MAVLINK_MSG_ID_MIXER_PARAM_SET_MIN_LEN, MAVLINK_MSG_ID_MIXER_PARAM_SET_LEN, MAVLINK_MSG_ID_MIXER_PARAM_SET_CRC);
 #else
     mavlink_mixer_param_set_t *packet = (mavlink_mixer_param_set_t *)msgbuf;
@@ -332,8 +306,6 @@ static inline void mavlink_msg_mixer_param_set_send_buf(mavlink_message_t *msgbu
     packet->mixer_sub_index = mixer_sub_index;
     packet->mixer_type = mixer_type;
     packet->param_type = param_type;
-    packet->param_array_write_count = param_array_write_count;
-    packet->param_array_index = param_array_index;
     mav_array_memcpy(packet->param_values, param_values, sizeof(float)*6);
     mav_array_memcpy(packet->param_id, param_id, sizeof(char)*16);
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_MIXER_PARAM_SET, (const char *)packet, MAVLINK_MSG_ID_MIXER_PARAM_SET_MIN_LEN, MAVLINK_MSG_ID_MIXER_PARAM_SET_LEN, MAVLINK_MSG_ID_MIXER_PARAM_SET_CRC);
@@ -437,33 +409,13 @@ static inline uint8_t mavlink_msg_mixer_param_set_get_param_type(const mavlink_m
 }
 
 /**
- * @brief Get field param_array_write_count from mixer_param_set message
- *
- * @return Count of array values to write
- */
-static inline uint8_t mavlink_msg_mixer_param_set_get_param_array_write_count(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  36);
-}
-
-/**
- * @brief Get field param_array_index from mixer_param_set message
- *
- * @return Array index
- */
-static inline uint8_t mavlink_msg_mixer_param_set_get_param_array_index(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  37);
-}
-
-/**
  * @brief Get field param_id from mixer_param_set message
  *
  * @return Onboard parameter id, terminated by NULL if the length is less than 16 human-readable chars and WITHOUT null termination (NULL) byte if the length is exactly 16 chars - applications have to provide 16+1 bytes storage if the ID is stored as string
  */
 static inline uint16_t mavlink_msg_mixer_param_set_get_param_id(const mavlink_message_t* msg, char *param_id)
 {
-    return _MAV_RETURN_char_array(msg, param_id, 16,  38);
+    return _MAV_RETURN_char_array(msg, param_id, 16,  36);
 }
 
 /**
@@ -495,8 +447,6 @@ static inline void mavlink_msg_mixer_param_set_decode(const mavlink_message_t* m
     mixer_param_set->mixer_sub_index = mavlink_msg_mixer_param_set_get_mixer_sub_index(msg);
     mixer_param_set->mixer_type = mavlink_msg_mixer_param_set_get_mixer_type(msg);
     mixer_param_set->param_type = mavlink_msg_mixer_param_set_get_param_type(msg);
-    mixer_param_set->param_array_write_count = mavlink_msg_mixer_param_set_get_param_array_write_count(msg);
-    mixer_param_set->param_array_index = mavlink_msg_mixer_param_set_get_param_array_index(msg);
     mavlink_msg_mixer_param_set_get_param_id(msg, mixer_param_set->param_id);
 #else
         uint8_t len = msg->len < MAVLINK_MSG_ID_MIXER_PARAM_SET_LEN? msg->len : MAVLINK_MSG_ID_MIXER_PARAM_SET_LEN;
